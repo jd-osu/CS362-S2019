@@ -80,7 +80,7 @@ int main() {
     
     int return_val;
     
-    bool result;
+    bool result, c2_result;
 
 
     // ************************************************************************************
@@ -114,7 +114,7 @@ int main() {
     
     //display_state(&G);    
     
-    bool c2_result = false;
+    c2_result = false;
     for (i=0; i<G.handCount[0]; i++)
     {
       if (G.hand[0][i] == c2)
@@ -166,7 +166,7 @@ int main() {
     
     display_state(&G);    
     
-    bool c2_result = false;
+    c2_result = false;
     for (i=0; i<G.handCount[0]; i++)
     {
       if (G.hand[0][i] == c2)
