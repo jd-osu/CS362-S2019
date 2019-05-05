@@ -183,7 +183,7 @@ int main() {
 
     // ************************************************************************************
     //TEST3
-    const char test3[] = "c1= copper, c2= gold (out of range), hand >1, c2_qty > 0";
+    const char test3[] = "c1= copper, c2= gold (cost too high)";
 
     // clear the game state
     memset(&G, 23, sizeof(struct gameState));
@@ -206,31 +206,54 @@ int main() {
     playedCount_prev = G.playedCardCount;
     c2_qty_Prev = G.supplyCount[c2];
     
-    display_state(&G);    
+    //display_state(&G);    
     
     return_val = _mine(0, &G, mine_idx, c1_idx, c2); // int player, struct gameState *state, int pos, int c1, int c2
     
-    display_state(&G);    
-    
-    c2_result = false;
-    for (i=0; i<G.handCount[0]; i++)
-    {
-      if (G.hand[0][i] == c2)
-      {
-        c2_result = true;
-        break;
-      }
-    }
-    
-    printf("c1 cost=%d\n", getCost(G.hand[0][c1_idx]));
-    printf("c2 cost=%d\n", getCost(c2));
-    printf("T/F stmnt=%d\n", (getCost(G.hand[0][c1_idx]) + 3) > getCost(c2));
+    //display_state(&G);    
     
     result =  ( (return_val == -1)
               );
 
     _assert(result, test3);
     
+
+    // ************************************************************************************
+    //TEST4
+    const char test4[] = "c1= copper, c2= 9999 (out of range)";
+
+    // clear the game state
+    memset(&G, 23, sizeof(struct gameState));
+
+    // initialize new game
+    initializeGame(numPlayer, k, seed, &G);
+
+    c1 = copper;
+    c2 = 9999;
+    c1_idx = G.handCount[0]/2;
+    mine_idx = 0;
+    //c2_qty = 
+
+    G.hand[0][c1_idx] = c1;
+    G.hand[0][mine_idx] = mine;
+    
+    handCount_prev = G.handCount[0];
+    deckCount_prev = G.deckCount[0];
+    discardCount_prev = G.discardCount[0];
+    playedCount_prev = G.playedCardCount;
+    //c2_qty_Prev = G.supplyCount[c2];
+    
+    //display_state(&G);    
+    
+    return_val = _mine(0, &G, mine_idx, c1_idx, c2); // int player, struct gameState *state, int pos, int c1, int c2
+    
+    //display_state(&G);    
+
+    result =  ( (return_val == -1)
+              );
+
+    _assert(result, test4);
+
     
     return 0;
 }
