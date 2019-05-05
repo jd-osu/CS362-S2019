@@ -82,7 +82,7 @@ int main() {
     //total_deck_tr = num_tr_deck + num_tr_discard;
     
     printf("Hand diff = %d, expected = %d\n", G.handCount[0] - handCount_prev, 2);
-    printf("Last two in hand = %d,%d, expected %d, %d\n", G.hand[0][handCount-2], G.hand[0][handCount-1], tr1, tr2);
+    printf("Last two in hand = %d,%d, expected %d, %d\n", G.hand[0][G.handCount[0]-2], G.hand[0][G.handCount[0]-1], tr1, tr2);
     printf("Deck/discard diff = %d, expected = %d\n", G.deckCount[0] + G.discardCount[0] - deckCount_prev - discardCount_prev, -2);
     //printf("Hand treasures diff = %d, expected = %d\n", num_tr_hand - num_tr_hand_prev, 2);
     //printf("Deck/discard treasures diff = %d, expected = %d\n", total_deck_tr - total_deck_tr_prev, 2);
