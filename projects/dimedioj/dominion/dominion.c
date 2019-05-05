@@ -69,7 +69,7 @@ int _mine(int player, struct gameState *state, int pos, int c1, int c2) {
 	  return -1;
 	}
 
-  if ( (getCost(state->hand[player][c1]) + 3) > getCost(c2) )
+  if ( getCost(c2) > (getCost(state->hand[player][c1]) + 3) )
 	{
 	  return -1;
 	}
