@@ -129,11 +129,11 @@ int main() {
     G.deckCount[0] = 0;
     G.discardCount[0] = 0;
     
-    display_state(&G);
+    //display_state(&G);
     
     return_val = _smithy(0, &G, smithy_idx);
 
-    display_state(&G);
+    //display_state(&G);
     
     printf("return=%d\n", return_val);
     
@@ -145,7 +145,7 @@ int main() {
 
     // ************************************************************************************
     //TEST3
-    const char test3[] = "deck count > 3, smithy card is last in hand";
+    const char test3[] = "deck count > 3, smithy card is only card in hand";
 
     // clear the game state
     memset(&G, 23, sizeof(struct gameState));
@@ -154,6 +154,8 @@ int main() {
     initializeGame(numPlayer, k, seed, &G);
 
     smithy_idx = 0;
+
+    G.handCount[0] = 1;
 
     G.hand[0][smithy_idx] = smithy;
     
@@ -164,11 +166,11 @@ int main() {
     card2 = G.deck[0][G.deckCount[0]-2];
     card3 = G.deck[0][G.deckCount[0]-3];
 
-    //display_state(&G);
+    display_state(&G);
     
     return_val = _smithy(0, &G, smithy_idx);
 
-    //display_state(&G);
+    display_state(&G);
     
     result =  ( (return_val == 0) &&
                 (G.handCount[0] - handCount_prev == 3-1) &&
