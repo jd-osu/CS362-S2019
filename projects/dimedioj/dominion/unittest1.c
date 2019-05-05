@@ -120,7 +120,7 @@ int main() {
     result =  (  (G.handCount[0] - handCount_prev == 2) &&
                 ((G.hand[0][G.handCount[0]-2] == tr1) && (G.hand[0][G.handCount[0]-1] == tr2)) &&
                 (G.deckCount[0] + G.discardCount[0] - deckCount_prev - discardCount_prev == -2) &&
-                (G.discardCount[0] == G.deckCount_prev - 2) &&
+                (G.discardCount[0] == deckCount_prev - 2) &&
                 (G.deckCount[0] == 0)
               );
 
