@@ -18,7 +18,7 @@ typedef enum {false, true} bool;
 
 const char PASS[] = "PASS";
 const char FAIL[] = "FAIL";
-const char FUNCTION[] = "_smithy(int player, struct gameState *state, int pos)";
+const char FUNCTION[] = "_mine()";
 
 void display_state(struct gameState *state)
 {
@@ -44,7 +44,14 @@ void display_state(struct gameState *state)
     printf("%d : %d\n", i, state->playedCards[i]);
   printf("\n");
   
+  printf("SUPPLY:\n");
+  for (i=0; i<=treasure_map; i++)
+    printf("%d : %d\n", i, state->supplyCount[i]);
+  printf("\n");
+  
 }
+
+
 
 int _assert(bool condition, const char *test_name)
 {
@@ -58,7 +65,6 @@ int _assert(bool condition, const char *test_name)
   printf(" when %s\n", test_name);
 }
 
-
 int main() {
     int i;
     int seed = 1000;
@@ -68,18 +74,18 @@ int main() {
                , remodel, smithy, village, baron, great_hall};
     struct gameState G;
 
-    int handCount_prev, deckCount_prev, playedCount_prev;
+    int handCount_prev, deckCount_prev, discardCount_prev, playedCount_prev, c2_qty_Prev;
     
-    int smithy_idx, card1, card2, card3;
+    int c1, c2, c1_idx, c2_qty, mine_idx;
     
     int return_val;
     
-    bool result;
+    bool result, c2_result;
 
 
     // ************************************************************************************
     //TEST1
-    const char test1[] = "deck count > 3, smithy card is first in hand";
+    const char test1[] = "c1= copper, c2= silver, hand >1, c2_qty > 0";
 
     // clear the game state
     memset(&G, 23, sizeof(struct gameState));
@@ -87,34 +93,51 @@ int main() {
     // initialize new game
     initializeGame(numPlayer, k, seed, &G);
 
-    smithy_idx = G.handCount[0]-1;
+    c1 = copper;
+    c2 = silver;
+    c1_idx = G.handCount[0]/2;
+    mine_idx = 0;
+    //c2_qty = 
 
-    G.hand[0][smithy_idx] = smithy;
+    G.hand[0][c1_idx] = c1;
+    G.hand[0][mine_idx] = mine;
     
     handCount_prev = G.handCount[0];
     deckCount_prev = G.deckCount[0];
+    discardCount_prev = G.discardCount[0];
     playedCount_prev = G.playedCardCount;
-    card1 = G.deck[0][G.deckCount[0]-1];
-    card2 = G.deck[0][G.deckCount[0]-2];
-    card3 = G.deck[0][G.deckCount[0]-3];
-
-    //display_state(&G);
+    c2_qty_Prev = G.supplyCount[c2];
     
-    return_val = _smithy(0, &G, smithy_idx);
-
-    //display_state(&G);
+    //display_state(&G);    
+    
+    return_val = _mine(0, &G, mine_idx, c1_idx, c2); // int player, struct gameState *state, int pos, int c1, int c2
+    
+    //display_state(&G);    
+    
+    c2_result = false;
+    for (i=0; i<G.handCount[0]; i++)
+    {
+      if (G.hand[0][i] == c2)
+      {
+        c2_result = true;
+        break;
+      }
+    }
     
     result =  ( (return_val == 0) &&
-                (G.handCount[0] - handCount_prev == 3-1) &&
-                ((G.hand[0][G.handCount[0]-3] == card1) && (G.hand[0][G.handCount[0]-2] == card2) && (G.hand[0][G.handCount[0]-1] == card3)) &&
-                (G.playedCardCount == playedCount_prev + 1)
+                (G.handCount[0] - handCount_prev == -1) &&
+                (G.playedCardCount - playedCount_prev == 1) &&
+                (G.discardCount[0] - discardCount_prev == 0) &&
+                (c2_result) &&
+                (G.supplyCount[c2] - c2_qty_Prev == -1)
               );
 
     _assert(result, test1);
-
+    
+    
     // ************************************************************************************
     //TEST2
-    const char test2[] = "deck is empty, discard is empty";
+    const char test2[] = "c1= silver, c2= gold, hand >1, c2_qty > 0";
 
     // clear the game state
     memset(&G, 23, sizeof(struct gameState));
@@ -122,20 +145,43 @@ int main() {
     // initialize new game
     initializeGame(numPlayer, k, seed, &G);
 
-    smithy_idx = G.handCount[0]-1;
+    c1 = silver;
+    c2 = gold;
+    c1_idx = G.handCount[0]/2;
+    mine_idx = 0;
+    //c2_qty = 
 
-    G.hand[0][smithy_idx] = smithy;
+    G.hand[0][c1_idx] = c1;
+    G.hand[0][mine_idx] = mine;
     
-    G.deckCount[0] = 0;
-    G.discardCount[0] = 0;
+    handCount_prev = G.handCount[0];
+    deckCount_prev = G.deckCount[0];
+    discardCount_prev = G.discardCount[0];
+    playedCount_prev = G.playedCardCount;
+    c2_qty_Prev = G.supplyCount[c2];
     
-    //display_state(&G);
+    //display_state(&G);    
     
-    return_val = _smithy(0, &G, smithy_idx);
-
-    //display_state(&G);
+    return_val = _mine(0, &G, mine_idx, c1_idx, c2); // int player, struct gameState *state, int pos, int c1, int c2
     
-    result =  ( (return_val == -1)
+    //display_state(&G);    
+    
+    c2_result = false;
+    for (i=0; i<G.handCount[0]; i++)
+    {
+      if (G.hand[0][i] == c2)
+      {
+        c2_result = true;
+        break;
+      }
+    }
+    
+    result =  ( (return_val == 0) &&
+                (G.handCount[0] - handCount_prev == -1) &&
+                (G.playedCardCount - playedCount_prev == 1) &&
+                (G.discardCount[0] - discardCount_prev == 0) &&
+                (c2_result) &&
+                (G.supplyCount[c2] - c2_qty_Prev == -1)
               );
 
     _assert(result, test2);
@@ -143,7 +189,7 @@ int main() {
 
     // ************************************************************************************
     //TEST3
-    const char test3[] = "deck count > 3, smithy card is last in hand";
+    const char test3[] = "c2_qty = 0";
 
     // clear the game state
     memset(&G, 23, sizeof(struct gameState));
@@ -151,30 +197,33 @@ int main() {
     // initialize new game
     initializeGame(numPlayer, k, seed, &G);
 
-    smithy_idx = 0;
+    c1 = copper;
+    c2 = silver;
+    c1_idx = G.handCount[0]/2;
+    mine_idx = 0;
+    c2_qty = 0;
 
-    G.hand[0][smithy_idx] = smithy;
+    G.hand[0][c1_idx] = c1;
+    G.hand[0][mine_idx] = mine;
+    G.supplyCount[c2] = 0;
     
     handCount_prev = G.handCount[0];
     deckCount_prev = G.deckCount[0];
+    discardCount_prev = G.discardCount[0];
     playedCount_prev = G.playedCardCount;
-    card1 = G.deck[0][G.deckCount[0]-1];
-    card2 = G.deck[0][G.deckCount[0]-2];
-    card3 = G.deck[0][G.deckCount[0]-3];
-
-    //display_state(&G);
+    c2_qty_Prev = G.supplyCount[c2];
     
-    return_val = _smithy(0, &G, smithy_idx);
-
-    //display_state(&G);
+    //display_state(&G);    
     
-    result =  ( (return_val == 0) &&
-                (G.handCount[0] - handCount_prev == 3-1) &&
-                ((G.hand[0][G.handCount[0]-3] == card1) && (G.hand[0][G.handCount[0]-2] == card2) && (G.hand[0][G.handCount[0]-1] == card3)) &&
-                (G.playedCardCount == playedCount_prev + 1)
+    return_val = _mine(0, &G, mine_idx, c1_idx, c2); // int player, struct gameState *state, int pos, int c1, int c2
+    
+    //display_state(&G);    
+    
+    result =  ( (return_val == -1)
               );
 
     _assert(result, test3);
+
     
     return 0;
 }
