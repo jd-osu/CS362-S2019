@@ -188,9 +188,6 @@ int main() {
       }
       printf("1: endTurn\n");
 
-      endTurn(&G);
-    }
-    
       printf("player=%d\n", whoseTurn(&G));
       
       printf("handCount=%d\n", G.handCount[whoseTurn(&G)]);
@@ -212,6 +209,11 @@ int main() {
       }
       
       printf("\n");
+
+      endTurn(&G);
+    }
+    
+
     
     round++;
   }
