@@ -116,7 +116,7 @@ int main() {
 
     // ************************************************************************************
     //TEST2
-    const char test2[] = "deck count = 0, smithy card is first in hand";
+    const char test2[] = "deck is empty, smithy card is first in hand";
 
     // clear the game state
     memset(&G, 23, sizeof(struct gameState));
@@ -152,6 +152,41 @@ int main() {
 
     _assert(result, test2);
 
+
+    // ************************************************************************************
+    //TEST3
+    const char test3[] = "deck count > 3, smithy card is last in hand";
+
+    // clear the game state
+    memset(&G, 23, sizeof(struct gameState));
+
+    // initialize new game
+    initializeGame(numPlayer, k, seed, &G);
+
+    smithy_idx = 0;
+
+    G.hand[0][smithy_idx] = smithy;
+    
+    handCount_prev = G.handCount[0];
+    deckCount_prev = G.deckCount[0];
+    playedCount_prev = G.playedCardCount;
+    card1 = G.deck[0][G.deckCount[0]-1];
+    card2 = G.deck[0][G.deckCount[0]-2];
+    card3 = G.deck[0][G.deckCount[0]-3];
+
+    //display_state(&G);
+    
+    return_val = cardEffect(smithy, 0, 0, 0, &G, smithy_idx, bonus);
+
+    //display_state(&G);
+    
+    result =  ( (return_val == 0) &&
+                (G.handCount[0] - handCount_prev == 3-1) &&
+                ((G.hand[0][G.handCount[0]-3] == card1) && (G.hand[0][G.handCount[0]-2] == card2) && (G.hand[0][G.handCount[0]-1] == card3)) &&
+                (G.playedCardCount == playedCount_prev + 1)
+              );
+
+    _assert(result, test3);
     
     return 0;
 }
