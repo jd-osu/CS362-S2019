@@ -109,7 +109,7 @@ int main() {
     
     display_state(&G);    
     
-    return_val = _mine(0, &G, 0, c1, c2); // int player, struct gameState *state, int pos, int c1, int c2
+    return_val = _mine(0, &G, 0, c1_idx, c2); // int player, struct gameState *state, int pos, int c1, int c2
     
     display_state(&G);    
     
