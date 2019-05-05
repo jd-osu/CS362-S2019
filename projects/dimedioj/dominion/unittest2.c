@@ -76,7 +76,7 @@ int main() {
 
     int handCount_prev, deckCount_prev, discardCount_prev, playedCount_prev, c2_qty_Prev;
     
-    int c1, c2, c1_idx, c2_qty;
+    int c1, c2, c1_idx, c2_qty, mine_idx;
     
     int return_val;
     
@@ -96,10 +96,11 @@ int main() {
     c1 = copper;
     c2 = silver;
     c1_idx = G.handCount[0]/2;
+    mine_idx = 0;
     //c2_qty = 
 
     G.hand[0][c1_idx] = c1;
-    G.hand[0][0] = mine;
+    G.hand[0][mine_idx] = mine;
     
     handCount_prev = G.handCount[0];
     deckCount_prev = G.deckCount[0];
@@ -109,22 +110,29 @@ int main() {
     
     display_state(&G);    
     
-    return_val = _mine(0, &G, 0, c1_idx, c2); // int player, struct gameState *state, int pos, int c1, int c2
+    return_val = _mine(0, &G, mine_idx, c1_idx, c2); // int player, struct gameState *state, int pos, int c1, int c2
     
     display_state(&G);    
+    
+    bool c2_result = false;
+    for (i=0; i<G.handCount[0]; i++)
+    {
+      if (G.hand[0][i] == c2)
+      {
+        c2_result = true;
+        break;
+      }
+    }
     
     result =  ( (return_val == 0) &&
                 (G.handCount[0] - handCount_prev == 1) &&
                 (G.playedCardCount - playedCount_prev == 1) &&
                 (G.discardCount[0] - discardCount_prev == 0) &&
-                (G.hand[0][G.handCount[0]-1] == c2) &&
+                (c2_result) &&
                 (G.supplyCount[c2] - c2_qty_Prev == -1)
               );
 
     _assert(result, test1);
-
-
-
     
     
     return 0;
