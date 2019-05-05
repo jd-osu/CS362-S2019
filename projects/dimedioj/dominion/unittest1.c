@@ -250,8 +250,8 @@ int main() {
     _assert(result, test5);
     
     // ************************************************************************************
-    //TEST5
-    const char test5[] = "no treasure cards";
+    //TEST6
+    const char test6[] = "no treasure cards";
 
     // clear the game state
     memset(&G, 23, sizeof(struct gameState));
@@ -274,7 +274,7 @@ int main() {
                 (G.deckCount[0] + G.discardCount[0] - deckCount_prev - discardCount_prev == 0)
               );
 
-    _assert(result, test5);
+    _assert(result, test6);
     
     return 0;
 }
