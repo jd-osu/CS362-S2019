@@ -79,7 +79,6 @@ int main() {
   int money = 0;
   int smithyPos = -1;
   int adventurerPos = -1;
-  int i=0;
 
   int numSmithies = 0;
   int numAdventurers = 0;
