@@ -86,7 +86,7 @@ int main() {
     tr1 = 4;
     tr2 = 5;
     tr1_idx = 0;
-    tr2_idx = 0;
+    tr2_idx = 1;
 
     G.deck[0][tr1_idx] = tr1;
     G.deck[0][tr2_idx] = tr2;
