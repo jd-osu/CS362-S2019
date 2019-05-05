@@ -67,7 +67,7 @@ int main() {
     // initialize new game
     initializeGame(numPlayer, k, seed, &G);
 
-    G.
+    
     
     
     
