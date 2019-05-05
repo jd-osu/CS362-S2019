@@ -125,7 +125,7 @@ int main() {
     }
     
     result =  ( (return_val == 0) &&
-                (G.handCount[0] - handCount_prev == 1) &&
+                (G.handCount[0] - handCount_prev == -1) &&
                 (G.playedCardCount - playedCount_prev == 1) &&
                 (G.discardCount[0] - discardCount_prev == 0) &&
                 (c2_result) &&
