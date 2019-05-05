@@ -129,11 +129,11 @@ int main() {
     G.deckCount[0] = 0;
     G.discardCount[0] = 0;
     
-    //display_state(&G);
+    display_state(&G);
     
     return_val = _smithy(0, &G, smithy_idx);
 
-    //display_state(&G);
+    display_state(&G);
     
     result =  ( (return_val == -1)
               );
