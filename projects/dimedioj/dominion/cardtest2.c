@@ -39,6 +39,11 @@ void display_state(struct gameState *state)
     printf("%d : %d\n", i, state->discard[0][i]);
   printf("\n");
   
+  printf("PLAYED: %d\n", state->playedCardCount[0]);
+  for (i=0; i<state->playedCardCount[0]; i++)
+    printf("%d : %d\n", i, state->playedCards[0][i]);
+  printf("\n");
+  
 }
 
 int _assert(bool condition, const char *test_name)
@@ -65,7 +70,7 @@ int main() {
 
     int *bonus;
 
-    int handCount_prev, deckCount_prev, discardCount_prev;
+    int handCount_prev, deckCount_prev, playedCount_prev;
     
     int smithy_idx, card1, card2, card3;
     
@@ -90,7 +95,7 @@ int main() {
     
     handCount_prev = G.handCount[0];
     deckCount_prev = G.deckCount[0];
-    discardCount_prev = G.discardCount[0];
+    playedCount_prev = G.playedCardCount[0];
     card1 = G.deck[0][G.deckCount[0]-1];
     card2 = G.deck[0][G.deckCount[0]-2];
     card3 = G.deck[0][G.deckCount[0]-3];
@@ -104,7 +109,7 @@ int main() {
     result =  ( (return_val == 0) &&
                 (G.handCount[0] - handCount_prev == 3-1) &&
                 ((G.hand[0][G.handCount[0]-3] == card1) && (G.hand[0][G.handCount[0]-2] == card2) && (G.hand[0][G.handCount[0]-1] == card3)) &&
-                (G.discardCount[0] == discardCount_prev + 1)
+                (G.playedCardCount[0] == playedCount_prev + 1)
               );
 
     _assert(result, test1);
