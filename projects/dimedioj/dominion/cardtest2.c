@@ -20,6 +20,27 @@ const char PASS[] = "PASS";
 const char FAIL[] = "FAIL";
 const char FUNCTION[] = "cardEffect(SMITHY)";
 
+void display_state(struct gameState *state)
+{
+  int i;
+  
+  printf("HAND: %d\n", state->handCount[0]);
+  for (i=0; i<state->handCount[0]; i++)
+    printf("%d : %d\n", i, state->hand[0][i]);
+  printf("\n");
+  
+  printf("DECK: %d\n", state->deckCount[0]);
+  for (i=0; i<state->deckCount[0]; i++)
+    printf("%d : %d\n", i, state->deck[0][i]);
+  printf("\n");
+  
+  printf("DISCARD: %d\n", state->discardCount[0]);
+  for (i=0; i<state->discardCount[0]; i++)
+    printf("%d : %d\n", i, state->discard[0][i]);
+  printf("\n");
+  
+}
+
 int _assert(bool condition, const char *test_name)
 {
   printf("%s: ", FUNCTION);
@@ -73,8 +94,12 @@ int main() {
     card1 = G.deck[0][0];
     card2 = G.deck[0][1];
     card3 = G.deck[0][2];
+
+    display_state(&G);
     
     return_val = cardEffect(smithy, 0, 0, 0, &G, smithy_idx, bonus);
+
+    display_state(&G);
     
     result =  ( (return_val == 0) &&
                 (G.handCount[0] - handCount_prev == 3-1) &&

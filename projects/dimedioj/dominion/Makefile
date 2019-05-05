@@ -45,4 +45,4 @@ cardtest2: cardtest2.c dominion.c rngs.c
 	gcc -o cardtest2 -g cardtest2.c dominion.c rngs.c -lm
 
 clean:
-	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe unittest1 cardtest1
+	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe unittest1 cardtest1 cardtest2

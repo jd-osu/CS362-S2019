@@ -96,11 +96,11 @@ int main() {
     deckCount_prev = G.deckCount[0];
     discardCount_prev = G.discardCount[0];
     
-    display_state(&G);
+    //display_state(&G);
     
     return_val = cardEffect(adventurer, 0, 0, 0, &G, 0, bonus);
 
-    display_state(&G);
+    //display_state(&G);
     
     result =  ( (return_val == 0) &&
                 (G.handCount[0] - handCount_prev == 2) &&
@@ -142,11 +142,11 @@ int main() {
     deckCount_prev = G.deckCount[0];
     discardCount_prev = G.discardCount[0];
     
-    display_state(&G);
+    //display_state(&G);
     
     return_val = cardEffect(adventurer, 0, 0, 0, &G, 0, bonus);
 
-    display_state(&G);
+    //display_state(&G);
     
     result =  ( (return_val == 0) &&
                 (G.handCount[0] - handCount_prev == 2) &&
@@ -179,11 +179,11 @@ int main() {
     deckCount_prev = G.deckCount[0];
     discardCount_prev = G.discardCount[0];
     
-    display_state(&G);
+    //display_state(&G);
     
     return_val = cardEffect(adventurer, 0, 0, 0, &G, 0, bonus);
 
-    display_state(&G);
+    //display_state(&G);
     
     result =  ( (return_val == 0) &&
                 (G.handCount[0] - handCount_prev == 1) &&
@@ -210,11 +210,11 @@ int main() {
     deckCount_prev = G.deckCount[0];
     discardCount_prev = G.discardCount[0];
     
-    display_state(&G);
+    //display_state(&G);
     
     return_val = cardEffect(adventurer, 0, 0, 0, &G, 0, bonus);
 
-    display_state(&G);
+    //display_state(&G);
     
     result =  ( (return_val == 0) &&
                 (G.handCount[0] - handCount_prev == 0) &&
