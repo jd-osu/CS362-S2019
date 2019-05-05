@@ -32,7 +32,6 @@ int num_treasures(int cards[], int n)
   return count;
 }
 
-
 int main() {
     int i;
     int seed = 1000;
@@ -41,25 +40,12 @@ int main() {
     int k[10] = {adventurer, council_room, feast, gardens, mine
                , remodel, smithy, village, baron, great_hall};
     struct gameState G;
-    
-    int prev_hand_p1, prev_hand_p2;
-    int first_tr, first_tr_idx, second_tr, second_tr_idx;
-    
-    int cards_revealed[MAX_PLAYERS][MAX_DECK];
-    
-    int maxHandCount = 5;
-    // arrays of all coppers, silvers, and golds
-    int coppers[MAX_HAND];
-    int silvers[MAX_HAND];
-    int golds[MAX_HAND];
-    for (i = 0; i < MAX_HAND; i++)
-    {
-        coppers[i] = copper;
-        silvers[i] = silver;
-        golds[i] = gold;
-    }
 
-    printf ("TESTING _adventurer():\n");
+    int handCount_prev, deckCount_prev, discardCount_prev;
+    int num_tr_hand, num_tr_deck, num_tr_discard, total_deck_tr;
+    int num_tr_hand_prev, num_tr_deck_prev, num_tr_discard_prev, total_deck_tr_prev;
+    
+    int tr1, tr2;
 
     // clear the game state
     memset(&G, 23, sizeof(struct gameState));
@@ -67,52 +53,40 @@ int main() {
     // initialize new game
     initializeGame(numPlayer, k, seed, &G);
 
+    printf ("TESTING _adventurer():\n");
     
+    //SET INPUT CONDITIONS - 1st 2 cards of deck are treasure cards
+    tr1 = 4;
+    tr2 = 5;
+
+    G.deck[0][0] = tr1;
+    G.deck[0][0] = tr2;
     
+    handCount_prev = G.handCount[0];
+    deckCount_prev = G.deckCount[0];
+    discardCount_prev = G.discardCount[0];
+    num_tr_hand_prev = num_treasures(G.hand, G.handCount);
+    num_tr_deck_prev = num_treasures(G.deck, G.deckCount);
+    num_tr_discard_prev = num_treasures(G.discard, G.discardCount);
+    total_deck_tr_prev = num_tr_deck_prev + num_tr_discard_prev;
+
     
+    // CALL FUNCTION
+    _adventurer(0, &G);
     
-    printf("G.coins = %d, expected = %d\n", G.coins, handCount * 1 + bonus);
+    num_tr_hand = num_treasures(G.hand, G.handCount);
+    num_tr_deck = num_treasures(G.deck, G.deckCount);
+    num_tr_discard = num_treasures(G.discard, G.discardCount);
+    total_deck_tr = num_tr_deck + num_tr_discard;
+    
+    printf("Hand diff = %d, expected = %d\n", G.handCount[0] - handCount_prev, 2);
+    printf("Last two in hand = %d,%d, expected %d, %d\n", G.hand[0][handCount-2], G.hand[0][handCount-1], tr1, tr2);
+    printf("Deck/discard diff = %d, expected = %d\n", G.deckCount[0] + G.discardCount[0] - deckCount_prev - discardCount_prev, -2);
+    printf("Hand treasures diff = %d, expected = %d\n", num_tr_hand - num_tr_hand_prev, 2);
+    printf("Deck/discard treasures diff = %d, expected = %d\n", total_deck_tr - total_deck_tr_prev, 2);
 
+    //assert(G.coins == handCount * 3 + bonus); // check if the number of coins is correct
 
-
-
-
-
-    for (p = 0; p < numPlayer; p++)
-    {
-        for (handCount = 1; handCount <= maxHandCount; handCount++)
-        {
-            for (bonus = 0; bonus <= maxBonus; bonus++)
-            {
-#if (NOISY_TEST == 1)
-                printf("Test player %d with %d treasure card(s) and %d bonus.\n", p, handCount, bonus);
-#endif
-                memset(&G, 23, sizeof(struct gameState));   // clear the game state
-                r = initializeGame(numPlayer, k, seed, &G); // initialize a new game
-                G.handCount[p] = handCount;                 // set the number of cards on hand
-                memcpy(G.hand[p], coppers, sizeof(int) * handCount); // set all the cards to copper
-                updateCoins(p, &G, bonus);
-#if (NOISY_TEST == 1)
-                printf("G.coins = %d, expected = %d\n", G.coins, handCount * 1 + bonus);
-#endif
-                assert(G.coins == handCount * 1 + bonus); // check if the number of coins is correct
-
-                memcpy(G.hand[p], silvers, sizeof(int) * handCount); // set all the cards to silver
-                updateCoins(p, &G, bonus);
-#if (NOISY_TEST == 1)
-                printf("G.coins = %d, expected = %d\n", G.coins, handCount * 2 + bonus);
-#endif
-                assert(G.coins == handCount * 2 + bonus); // check if the number of coins is correct
-
-                memcpy(G.hand[p], golds, sizeof(int) * handCount); // set all the cards to gold
-                updateCoins(p, &G, bonus);
-#if (NOISY_TEST == 1)
-                printf("G.coins = %d, expected = %d\n", G.coins, handCount * 3 + bonus);
-#endif
-                assert(G.coins == handCount * 3 + bonus); // check if the number of coins is correct
-            }
-        }
-    }
 
     printf("All tests passed!\n");
 
