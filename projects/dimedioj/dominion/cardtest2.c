@@ -138,11 +138,11 @@ int main() {
     card2 = G.discard[0][G.discardCount[0]-2];
     card3 = G.discard[0][G.discardCount[0]-3];
 
-    display_state(&G);
+    //display_state(&G);
     
     return_val = cardEffect(smithy, 0, 0, 0, &G, smithy_idx, bonus);
 
-    display_state(&G);
+    //display_state(&G);
     
     result =  ( (return_val == 0) &&
                 (G.handCount[0] - handCount_prev == 3-1) &&

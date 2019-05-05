@@ -38,6 +38,9 @@ all: playdom player
 unittest1: unittest1.c dominion.c rngs.c
 	gcc -o unittest1 -g unittest1.c dominion.c rngs.c -lm
   
+unittest2: unittest2.c dominion.c rngs.c
+	gcc -o unittest2 -g unittest2.c dominion.c rngs.c -lm
+  
 cardtest1: cardtest1.c dominion.c rngs.c
 	gcc -o cardtest1 -g cardtest1.c dominion.c rngs.c -lm
 
