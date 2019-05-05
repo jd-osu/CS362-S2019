@@ -95,11 +95,11 @@ int main() {
     deckCount_prev = G.deckCount[0];
     discardCount_prev = G.discardCount[0];
     
-    display_state(&G);    
+    //display_state(&G);    
     
     return_val = _adventurer(0, &G);
     
-    display_state(&G);    
+    //display_state(&G);    
     
     result =  ( (return_val == 0) &&
                 (G.handCount[0] - handCount_prev == 2) &&
@@ -136,11 +136,11 @@ int main() {
     deckCount_prev = G.deckCount[0];
     discardCount_prev = G.discardCount[0];
     
-    display_state(&G);    
+    //display_state(&G);    
     
     return_val = _adventurer(0, &G);
     
-    display_state(&G);  
+    //display_state(&G);  
     
     result =  ( (return_val == 0) &&
                 (G.handCount[0] - handCount_prev == 2) &&
@@ -183,11 +183,11 @@ int main() {
     deckCount_prev = G.deckCount[0];
     discardCount_prev = G.discardCount[0];
     
-    display_state(&G);    
+    //display_state(&G);    
     
     return_val = _adventurer(0, &G);
     
-    display_state(&G); 
+    //display_state(&G); 
     
     result =  ( (return_val == 0) && 
                 (G.handCount[0] - handCount_prev == 2) &&

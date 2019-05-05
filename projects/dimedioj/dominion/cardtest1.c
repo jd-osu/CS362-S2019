@@ -20,6 +20,27 @@ const char PASS[] = "PASS";
 const char FAIL[] = "FAIL";
 const char FUNCTION[] = "cardEffect(ADVENTURER)";
 
+void display_state(struct gameState *state)
+{
+  int i;
+  
+  printf("HAND: %d\n", state->handCount[0]);
+  for (i=0; i<state->handCount[0]; i++)
+    printf("%d : %d\n", i, state->hand[0][i]);
+  printf("\n");
+  
+  printf("DECK: %d\n", state->deckCount[0]);
+  for (i=0; i<state->deckCount[0]; i++)
+    printf("%d : %d\n", i, state->deck[0][i]);
+  printf("\n");
+  
+  printf("DISCARD: %d\n", state->discardCount[0]);
+  for (i=0; i<state->discardCount[0]; i++)
+    printf("%d : %d\n", i, state->discard[0][i]);
+  printf("\n");
+  
+}
+
 int _assert(bool condition, const char *test_name)
 {
   printf("%s: ", FUNCTION);
@@ -65,8 +86,8 @@ int main() {
 
     tr1 = 4;
     tr2 = 5;
-    tr1_idx = 0;
-    tr2_idx = 0;
+    tr1_idx = G.deckCount[0]-1;
+    tr2_idx = G.deckCount[0]-2;
 
     G.deck[0][tr1_idx] = tr1;
     G.deck[0][tr2_idx] = tr2;
@@ -75,7 +96,11 @@ int main() {
     deckCount_prev = G.deckCount[0];
     discardCount_prev = G.discardCount[0];
     
-    return_val = cardEffect(7, 0, 0, 0, &G, 0, bonus);
+    display_state(&G);
+    
+    return_val = cardEffect(adventurer, 0, 0, 0, &G, 0, bonus);
+
+    display_state(&G);
     
     result =  ( (return_val == 0) &&
                 (G.handCount[0] - handCount_prev == 2) &&
@@ -117,7 +142,11 @@ int main() {
     deckCount_prev = G.deckCount[0];
     discardCount_prev = G.discardCount[0];
     
-    return_val = cardEffect(7, 0, 0, 0, &G, 0, bonus);
+    display_state(&G);
+    
+    return_val = cardEffect(adventurer, 0, 0, 0, &G, 0, bonus);
+
+    display_state(&G);
     
     result =  ( (return_val == 0) &&
                 (G.handCount[0] - handCount_prev == 2) &&
@@ -150,7 +179,11 @@ int main() {
     deckCount_prev = G.deckCount[0];
     discardCount_prev = G.discardCount[0];
     
-    return_val = cardEffect(7, 0, 0, 0, &G, 0, bonus);
+    display_state(&G);
+    
+    return_val = cardEffect(adventurer, 0, 0, 0, &G, 0, bonus);
+
+    display_state(&G);
     
     result =  ( (return_val == 0) &&
                 (G.handCount[0] - handCount_prev == 1) &&
@@ -177,7 +210,11 @@ int main() {
     deckCount_prev = G.deckCount[0];
     discardCount_prev = G.discardCount[0];
     
-    return_val = cardEffect(7, 0, 0, 0, &G, 0, bonus);
+    display_state(&G);
+    
+    return_val = cardEffect(adventurer, 0, 0, 0, &G, 0, bonus);
+
+    display_state(&G);
     
     result =  ( (return_val == 0) &&
                 (G.handCount[0] - handCount_prev == 0) &&
