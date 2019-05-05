@@ -206,11 +206,11 @@ int main() {
     playedCount_prev = G.playedCardCount;
     c2_qty_Prev = G.supplyCount[c2];
     
-    //display_state(&G);    
+    display_state(&G);    
     
     return_val = _mine(0, &G, mine_idx, c1_idx, c2); // int player, struct gameState *state, int pos, int c1, int c2
     
-    //display_state(&G);    
+    display_state(&G);    
     
     c2_result = false;
     for (i=0; i<G.handCount[0]; i++)
