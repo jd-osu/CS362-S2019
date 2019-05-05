@@ -84,16 +84,16 @@ int main() {
     // initialize new game
     initializeGame(numPlayer, k, seed, &G);
 
-    smithy_idx = 0;
+    smithy_idx = G.handCount[0]-1;
 
     G.hand[0][smithy_idx] = smithy;
     
     handCount_prev = G.handCount[0];
     deckCount_prev = G.deckCount[0];
     discardCount_prev = G.discardCount[0];
-    card1 = G.deck[0][0];
-    card2 = G.deck[0][1];
-    card3 = G.deck[0][2];
+    card1 = G.deck[0][G.deckCount[0]-1];
+    card2 = G.deck[0][G.deckCount[0]-2];
+    card3 = G.deck[0][G.deckCount[0]-3];
 
     display_state(&G);
     
