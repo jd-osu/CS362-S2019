@@ -20,6 +20,29 @@ const char PASS[] = "PASS";
 const char FAIL[] = "FAIL";
 const char FUNCTION[] = "_adventurer()";
 
+void display_state(struct gameState *state)
+{
+  int i;
+  
+  printf("HAND: %d\n", state->handCount[0]);
+  for (i=0; i<state->handCount[0]; i++)
+    printf("%d : %d\n", i, state->hand[0][i]);
+  printf("\n");
+  
+  printf("DECK: %d\n", state->deckCount[0]);
+  for (i=0; i<state->deckCount[0]; i++)
+    printf("%d : %d\n", i, state->deck[0][i]);
+  printf("\n");
+  
+  printf("DISCARD: %d\n", state->discardCount[0]);
+  for (i=0; i<state->discardCount[0]; i++)
+    printf("%d : %d\n", i, state->discard[0][i]);
+  printf("\n");
+  
+}
+
+
+
 int _assert(bool condition, const char *test_name)
 {
   printf("%s: ", FUNCTION);
@@ -31,7 +54,6 @@ int _assert(bool condition, const char *test_name)
   
   printf(" when %s\n", test_name);
 }
-
 
 int main() {
     int i;
@@ -73,8 +95,12 @@ int main() {
     deckCount_prev = G.deckCount[0];
     discardCount_prev = G.discardCount[0];
     
+    display_state(&G);    
+    
     // CALL FUNCTION
     return_val = _adventurer(0, &G);
+    
+    display_state(&G);    
     
     result =  ( (return_val == 0) &&
                 (G.handCount[0] - handCount_prev == 2) &&
