@@ -77,19 +77,19 @@ int _mine(int player, struct gameState *state, int pos, int c1, int c2) {
   gainCard(c2, state, 2, player);
 
   //discard card from hand
-  discardCard(pos, player, state, 1);
+  discardCard(pos, player, state, 0);
 
-/*
+
   //discard trashed card
   for (i = 0; i < state->handCount[player]; i++)
 	{
 	  if (state->hand[player][i] == j)
 	  {
-	    discardCard(i, player, state, 0);			
+	    discardCard(i, player, state, 1);			
 	    break;
 	  }
 	}
-*/
+
   
   return 0;
 }

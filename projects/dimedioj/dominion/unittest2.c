@@ -99,6 +99,7 @@ int main() {
     //c2_qty = 
 
     G.hand[0][c1_idx] = c1;
+    G.hand[0][0] = mine;
     
     handCount_prev = G.handCount[0];
     deckCount_prev = G.deckCount[0];
@@ -108,7 +109,7 @@ int main() {
     
     display_state(&G);    
     
-    return_val = _mine(0, &G, c1_idx, c1, c2); // int player, struct gameState *state, int pos, int c1, int c2
+    return_val = _mine(0, &G, 0, c1, c2); // int player, struct gameState *state, int pos, int c1, int c2
     
     display_state(&G);    
     
