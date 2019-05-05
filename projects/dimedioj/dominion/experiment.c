@@ -191,26 +191,24 @@ int main() {
       endTurn(&G);
     }
     
-        for (p=0; p<numPlayer; p++)
-    {
-      printf("player=%d\n", p);
+      printf("player=%d\n", whoseTurn(&G));
       
-      printf("handCount=%d\n", G.handCount[p]);
+      printf("handCount=%d\n", G.handCount[whoseTurn(&G)]);
       for (i=0; i<50; i++)
       {
-        printf("%d : %d\n", i, G.hand[p][i]);
+        printf("%d : %d\n", i, G.hand[whoseTurn(&G)][i]);
       }
       
-      printf("deckCount=%d\n", G.deckCount[p]);
+      printf("deckCount=%d\n", G.deckCount[whoseTurn(&G)]);
       for (i=0; i<50; i++)
       {
-        printf("%d : %d\n", i, G.deck[p][i]);
+        printf("%d : %d\n", i, G.deck[whoseTurn(&G)][i]);
       }
       
-      printf("discardCount=%d\n", G.discardCount[p]);
+      printf("discardCount=%d\n", G.discardCount[whoseTurn(&G)]);
       for (i=0; i<50; i++)
       {
-        printf("%d : %d\n", i, G.discard[p][i]);
+        printf("%d : %d\n", i, G.discard[whoseTurn(&G)][i]);
       }
       
       printf("\n");
