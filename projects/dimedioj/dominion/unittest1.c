@@ -137,7 +137,7 @@ int main() {
     // initialize new game
     initializeGame(numPlayer, k, seed, &G);
 
-    G.discardCount = 5;
+    G.discardCount[0] = 5;
 
     tr1 = 4;
     tr2 = 5;
