@@ -51,7 +51,7 @@ int main() {
     // initialize new game
     initializeGame(numPlayer, k, seed, &G);
 
-    for (p=0; p<MAX_PLAYERS; p++)
+    for (p=0; p<numPlayer; p++)
     {
       printf("player=%d\n", p);
       printf("handCount=%d\n", G.handCount[p]);
