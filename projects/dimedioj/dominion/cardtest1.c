@@ -75,7 +75,7 @@ int main() {
     deckCount_prev = G.deckCount[0];
     discardCount_prev = G.discardCount[0];
     
-    return_val = cardEffect(7, 0, 0, 0, &G, 0, &bonus);
+    return_val = cardEffect(7, 0, 0, 0, &G, 0, bonus);
     
     result =  ( (return_val == 0) &&
                 (G.handCount[0] - handCount_prev == 2) &&
@@ -117,7 +117,7 @@ int main() {
     deckCount_prev = G.deckCount[0];
     discardCount_prev = G.discardCount[0];
     
-    return_val = cardEffect(7, 0, 0, 0, &G, 0, &bonus);
+    return_val = cardEffect(7, 0, 0, 0, &G, 0, bonus);
     
     result =  ( (return_val == 0) &&
                 (G.handCount[0] - handCount_prev == 2) &&
@@ -150,7 +150,7 @@ int main() {
     deckCount_prev = G.deckCount[0];
     discardCount_prev = G.discardCount[0];
     
-    return_val = cardEffect(7, 0, 0, 0, &G, 0, &bonus);
+    return_val = cardEffect(7, 0, 0, 0, &G, 0, bonus);
     
     result =  ( (return_val == 0) &&
                 (G.handCount[0] - handCount_prev == 1) &&
@@ -177,7 +177,7 @@ int main() {
     deckCount_prev = G.deckCount[0];
     discardCount_prev = G.discardCount[0];
     
-    return_val = cardEffect(7, 0, 0, 0, &G, 0, &bonus);
+    return_val = cardEffect(7, 0, 0, 0, &G, 0, bonus);
     
     result =  ( (return_val == 0) &&
                 (G.handCount[0] - handCount_prev == 0) &&
