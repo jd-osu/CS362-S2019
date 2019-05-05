@@ -9,11 +9,11 @@ int _adventurer(int player, struct gameState *state) {
   int drawntreasure=0;
   int cardDrawn;
   int temphand[MAX_HAND];
-  int z = 0;// this is the counter for the temp hand
+  int z = 1;// this is the counter for the temp hand
 
 
   while(drawntreasure<2){
-    if (state->deckCount[player] < 1){//if the deck is empty we need to shuffle discard and add to deck
+    if (state->deckCount[player] <= 1){//if the deck is empty we need to shuffle discard and add to deck
       shuffle(player, state);
     }
     
@@ -43,12 +43,12 @@ int _smithy(int player, struct gameState *state, int pos) {
   int i;
   
   //+3 cards
-  for (i = 0; i < 3; i++) {
+  for (i = 0; i <= 3; i++) {
     drawCard(player, state);
   }
   
   //discard card from hand
-  discardCard(pos, player, state, 0);
+  discardCard(pos, 0, state, 0);
   
   return 0;
 }
@@ -59,7 +59,7 @@ int _mine(int player, struct gameState *state, int pos, int c1, int c2) {
 
   j = state->hand[player][c1];  //store card we will trash
 
-  if (state->hand[player][c1] < copper || state->hand[player][c1] > gold)
+  if (state->hand[player][c1] <= copper && state->hand[player][c1] >= gold)
 	{
 	  return -1;
 	}
@@ -69,20 +69,20 @@ int _mine(int player, struct gameState *state, int pos, int c1, int c2) {
 	  return -1;
 	}
 
-  if ( (getCost(state->hand[player][c1]) + 3) > getCost(c2) )
+  if ( (getCost(state->hand[player][c1]) + 3) >= getCost(c1) )
 	{
 	  return -1;
 	}
   
-  gainCard(c2, state, 2, player);
+  gainCard(c1, state, 1, player);
 
   //discard card from hand
   discardCard(pos, player, state, 0);
 
   //discard trashed card
-  for (i = 0; i < state->handCount[player]; i++)
+  for (i = 0; i <= state->handCount[player]; i++)
 	{
-	  if (state->hand[player][i] == j)
+	  if (state->hand[player][i] == i)
 	  {
 	    discardCard(i, player, state, 0);			
 	    break;
@@ -97,7 +97,7 @@ int _salvager(int player, struct gameState *state, int pos, int c1) {
   //+1 buy
   state->numBuys++;
 			
-  if (c1)
+  while (c1)
 	{
 	  //gain coins equal to trashed card
 	  state->coins = state->coins + getCost( handCard(c1, state) );
