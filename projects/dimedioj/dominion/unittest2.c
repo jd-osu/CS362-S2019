@@ -254,6 +254,58 @@ int main() {
 
     _assert(result, test4);
 
+
+    // ************************************************************************************
+    //TEST5
+    const char test5[] = "c1= silver, c2= gold, hand >1, c2_qty > 0";
+
+    // clear the game state
+    memset(&G, 23, sizeof(struct gameState));
+
+    // initialize new game
+    initializeGame(numPlayer, k, seed, &G);
+
+    c1 = silver;
+    c2 = gold;
+    c1_idx = G.handCount[0]/2;
+    mine_idx = 0;
+    //c2_qty = 
+
+    G.hand[0][c1_idx] = c1;
+    G.hand[0][mine_idx] = mine;
+    
+    handCount_prev = G.handCount[0];
+    deckCount_prev = G.deckCount[0];
+    discardCount_prev = G.discardCount[0];
+    playedCount_prev = G.playedCardCount;
+    c2_qty_Prev = G.supplyCount[c2];
+    
+    //display_state(&G);    
+    
+    return_val = _mine(0, &G, mine_idx, c1_idx, c2); // int player, struct gameState *state, int pos, int c1, int c2
+    
+    //display_state(&G);    
+    
+    c2_result = false;
+    for (i=0; i<G.handCount[0]; i++)
+    {
+      if (G.hand[0][i] == c2)
+      {
+        c2_result = true;
+        break;
+      }
+    }
+    
+    result =  ( (return_val == 0) &&
+                (G.handCount[0] - handCount_prev == -1) &&
+                (G.playedCardCount - playedCount_prev == 1) &&
+                (G.discardCount[0] - discardCount_prev == 0) &&
+                (c2_result) &&
+                (G.supplyCount[c2] - c2_qty_Prev == -1)
+              );
+
+    _assert(result, test5);
+
     
     return 0;
 }
