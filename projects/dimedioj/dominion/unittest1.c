@@ -52,6 +52,8 @@ int main() {
     
     int tr1, tr2, tr1_idx, tr2_idx;
     
+    int return_val;
+    
     bool result;
 
 
@@ -78,9 +80,10 @@ int main() {
     discardCount_prev = G.discardCount[0];
     
     // CALL FUNCTION
-    _adventurer(0, &G);
+    return_val = _adventurer(0, &G);
     
-    result =  (  (G.handCount[0] - handCount_prev == 2) &&
+    result =  ( (return_val == 0) &&
+                (G.handCount[0] - handCount_prev == 2) &&
                 ((G.hand[0][G.handCount[0]-2] == tr1) && (G.hand[0][G.handCount[0]-1] == tr2)) &&
                 (G.deckCount[0] + G.discardCount[0] - deckCount_prev - discardCount_prev == -2)
               );
@@ -115,9 +118,10 @@ int main() {
     discardCount_prev = G.discardCount[0];
     
     // CALL FUNCTION
-    _adventurer(0, &G);
+    return_val = _adventurer(0, &G);
     
-    result =  (  (G.handCount[0] - handCount_prev == 2) &&
+    result =  ( (return_val == 0) &&
+                (G.handCount[0] - handCount_prev == 2) &&
                 ((G.hand[0][G.handCount[0]-2] == tr1) && (G.hand[0][G.handCount[0]-1] == tr2)) &&
                 (G.deckCount[0] + G.discardCount[0] - deckCount_prev - discardCount_prev == -2) &&
                 (G.discardCount[0] == deckCount_prev - 2) &&
@@ -158,9 +162,10 @@ int main() {
     discardCount_prev = G.discardCount[0];
     
     // CALL FUNCTION
-    _adventurer(0, &G);
+    return_val = _adventurer(0, &G);
     
-    result =  (  (G.handCount[0] - handCount_prev == 2) &&
+    result =  ( (return_val == 0) && 
+                (G.handCount[0] - handCount_prev == 2) &&
                 ((G.hand[0][G.handCount[0]-2] == tr1) && (G.hand[0][G.handCount[0]-1] == tr2)) &&
                 (G.deckCount[0] + G.discardCount[0] - deckCount_prev - discardCount_prev == -2)
               );
@@ -200,9 +205,10 @@ int main() {
     discardCount_prev = G.discardCount[0];
     
     // CALL FUNCTION
-    _adventurer(0, &G);
+    return_val = _adventurer(0, &G);
     
-    result =  (  (G.handCount[0] - handCount_prev == 2) &&
+    result =  ( (return_val == 0) &&
+                (G.handCount[0] - handCount_prev == 2) &&
                 ((G.hand[0][G.handCount[0]-2] == tr1) && (G.hand[0][G.handCount[0]-1] == tr2)) &&
                 (G.deckCount[0] + G.discardCount[0] - deckCount_prev - discardCount_prev == -2)
               );
@@ -233,11 +239,39 @@ int main() {
     discardCount_prev = G.discardCount[0];
     
     // CALL FUNCTION
-    _adventurer(0, &G);
+    return_val = _adventurer(0, &G);
     
-    result =  (  (G.handCount[0] - handCount_prev == 1) &&
+    result =  ( (return_val == 0) &&
+                (G.handCount[0] - handCount_prev == 1) &&
                 (G.hand[0][G.handCount[0]-1] == tr1) &&
                 (G.deckCount[0] + G.discardCount[0] - deckCount_prev - discardCount_prev == -1)
+              );
+
+    _assert(result, test5);
+    
+    // ************************************************************************************
+    //TEST5
+    const char test5[] = "no treasure cards";
+
+    // clear the game state
+    memset(&G, 23, sizeof(struct gameState));
+
+    // initialize new game
+    initializeGame(numPlayer, k, seed, &G);
+
+    for (i=0; i<G.deckCount[0]; i++)
+      G.deck[0][i] = 1;
+    
+    handCount_prev = G.handCount[0];
+    deckCount_prev = G.deckCount[0];
+    discardCount_prev = G.discardCount[0];
+    
+    // CALL FUNCTION
+    return_val = _adventurer(0, &G);
+    
+    result =  ( (return_val == 0) &&
+                (G.handCount[0] - handCount_prev == 0) &&
+                (G.deckCount[0] + G.discardCount[0] - deckCount_prev - discardCount_prev == 0)
               );
 
     _assert(result, test5);
