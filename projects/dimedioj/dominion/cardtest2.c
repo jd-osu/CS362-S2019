@@ -129,7 +129,7 @@ int main() {
     G.hand[0][smithy_idx] = smithy;
     
     G.deckCount[0] = 0;
-    G.deckCount[0] = 10;
+    G.discardCount[0] = 10;
     
     handCount_prev = G.handCount[0];
     deckCount_prev = G.deckCount[0];
