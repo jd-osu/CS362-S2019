@@ -85,8 +85,8 @@ int main() {
 
     tr1 = 4;
     tr2 = 5;
-    tr1_idx = 0;
-    tr2_idx = 1;
+    tr1_idx = G.deckCount[0]-1;
+    tr2_idx = G.deckCount[0]-2;
 
     G.deck[0][tr1_idx] = tr1;
     G.deck[0][tr2_idx] = tr2;
@@ -122,8 +122,8 @@ int main() {
 
     tr1 = 4;
     tr2 = 5;
-    tr1_idx = G.deckCount[0]-2;
-    tr2_idx = G.deckCount[0]-1;
+    tr1_idx = 1;
+    tr2_idx = 0;
 
     for (i=0; i<G.deckCount[0]; i++)
       G.deck[0][i] = 1;
@@ -183,8 +183,11 @@ int main() {
     deckCount_prev = G.deckCount[0];
     discardCount_prev = G.discardCount[0];
     
-    // CALL FUNCTION
+    display_state(&G);    
+    
     return_val = _adventurer(0, &G);
+    
+    display_state(&G); 
     
     result =  ( (return_val == 0) && 
                 (G.handCount[0] - handCount_prev == 2) &&
