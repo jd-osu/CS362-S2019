@@ -18,7 +18,7 @@ typedef enum {false, true} bool;
 
 const char PASS[] = "PASS";
 const char FAIL[] = "FAIL";
-const char FUNCTION[] = "_smithy(int player, struct gameState *state, int pos)";
+const char FUNCTION[] = "_smithy()";
 
 void display_state(struct gameState *state)
 {
@@ -134,6 +134,8 @@ int main() {
     return_val = _smithy(0, &G, smithy_idx);
 
     display_state(&G);
+    
+    printf("return=%d\n", return_val);
     
     result =  ( (return_val == -1)
               );
