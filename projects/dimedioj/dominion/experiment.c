@@ -56,19 +56,19 @@ int main() {
       printf("player=%d\n", p);
       
       printf("handCount=%d\n", G.handCount[p]);
-      for (i=0; i<MAX_HAND; i++)
+      for (i=0; i<50; i++)
       {
         printf("%d : %d\n", i, G.hand[p][i]);
       }
       
       printf("deckCount=%d\n", G.deckCount[p]);
-      for (i=0; i<MAX_DECK; i++)
+      for (i=0; i<50; i++)
       {
         printf("%d : %d\n", i, G.deck[p][i]);
       }
       
       printf("discardCount=%d\n", G.discardCount[p]);
-      for (i=0; i<MAX_DECK; i++)
+      for (i=0; i<50; i++)
       {
         printf("%d : %d\n", i, G.discard[p][i]);
       }
