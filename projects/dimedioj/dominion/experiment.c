@@ -212,7 +212,6 @@ int main() {
       }
       
       printf("\n");
-    }
     
     round++;
   }
