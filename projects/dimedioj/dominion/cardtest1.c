@@ -18,7 +18,7 @@ typedef enum {false, true} bool;
 
 const char PASS[] = "PASS";
 const char FAIL[] = "FAIL";
-const char FUNCTION[] = "_cardEffect(ADVENTURER)";
+const char FUNCTION[] = "cardEffect(ADVENTURER)";
 
 int _assert(bool condition, const char *test_name)
 {
