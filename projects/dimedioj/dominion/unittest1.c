@@ -35,7 +35,7 @@ int _assert(bool condition, const char *test_name)
   else
     printf("%s", FAIL);
   
-  printf(" when test %s\n", test_name);
+  printf(" when %s\n", test_name);
 }
 
 
@@ -54,16 +54,17 @@ int main() {
     
     bool result;
 
+
+    
+    //TEST1 - 1st 2 cards of deck are treasure cards ****************************************
+    const char test1[] = "1st 2 cards of deck are treasure cards";
+
     // clear the game state
     memset(&G, 23, sizeof(struct gameState));
 
     // initialize new game
     initializeGame(numPlayer, k, seed, &G);
 
-    printf ("TESTING _adventurer():\n");
-    
-    //TEST1 - 1st 2 cards of deck are treasure cards
-    const char test1[] = "1st 2 cards of deck are treasure cards";
     tr1 = 4;
     tr2 = 5;
 
@@ -88,6 +89,44 @@ int main() {
     */
 
     _assert(result, test1);
+    // ************************************************************************************
+    
+    //TEST2 - last 2 cards are treasure cards *********************************************
+    const char test2[] = "last 2 cards of deck are treasure cards";
+
+    // clear the game state
+    memset(&G, 23, sizeof(struct gameState));
+
+    // initialize new game
+    initializeGame(numPlayer, k, seed, &G);
+
+    tr1 = 4;
+    tr2 = 5;
+
+    for (i=0; i<G.deckCount[0]; i++)
+      G.deck[0][i] = 1;
+
+
+    G.deck[0][G.deckCount[0]-2] = tr1;
+    G.deck[0][G.deckCount[0]-1] = tr2;
+    
+    handCount_prev = G.handCount[0];
+    deckCount_prev = G.deckCount[0];
+    discardCount_prev = G.discardCount[0];
+    
+    // CALL FUNCTION
+    _adventurer(0, &G);
+    
+    result =  (  (G.handCount[0] - handCount_prev == 2) &&
+                ((G.hand[0][G.handCount[0]-2] == tr1) && (G.hand[0][G.handCount[0]-1] == tr2)) &&
+                (G.deckCount[0] + G.discardCount[0] - deckCount_prev - discardCount_prev == -2) &&
+                (G.discardCount[0] == G.deckCount_prev - 2) &&
+                (G.deckCount[0] == 0)
+              );
+
+    _assert(result, test2);
+    // ************************************************************************************
+
 
     return 0;
 }
