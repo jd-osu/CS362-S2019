@@ -222,6 +222,10 @@ int main() {
       }
     }
     
+    printf("c1 cost=%d\n", getCost(state.hand[0][c1_idx]));
+    printf("c2 cost=%d\n", getCost(c2));
+    printf("T/F stmnt=%d\n", (getCost(state.hand[0][c1_idx]) + 3) > getCost(c2));
+    
     result =  ( (return_val == -1)
               );
 
