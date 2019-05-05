@@ -208,6 +208,39 @@ int main() {
               );
 
     _assert(result, test4);
+
+
+    // ************************************************************************************
+    //TEST5
+    const char test5[] = "only 1 treasure card";
+
+    // clear the game state
+    memset(&G, 23, sizeof(struct gameState));
+
+    // initialize new game
+    initializeGame(numPlayer, k, seed, &G);
+
+    tr1 = 4;
+    tr1_idx = 0;
+
+    for (i=0; i<G.deckCount[0]; i++)
+      G.deck[0][i] = 1;
+
+    G.deck[0][tr1_idx] = tr1;
+    
+    handCount_prev = G.handCount[0];
+    deckCount_prev = G.deckCount[0];
+    discardCount_prev = G.discardCount[0];
+    
+    // CALL FUNCTION
+    _adventurer(0, &G);
+    
+    result =  (  (G.handCount[0] - handCount_prev == 1) &&
+                (G.hand[0][G.handCount[0]-1] == tr1) &&
+                (G.deckCount[0] + G.discardCount[0] - deckCount_prev - discardCount_prev == -1)
+              );
+
+    _assert(result, test5);
     
     return 0;
 }
