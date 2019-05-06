@@ -168,11 +168,11 @@ int main() {
     playedCount_prev = G.playedCardCount;
     curse_qty_Prev = G.supplyCount[curse];
 
-    display_state(&G);    
+    //display_state(&G);    
     
     return_val = _sea_hag(0, &G);
     
-    display_state(&G);    
+    //display_state(&G);    
     
     result =  ( (return_val == 0) &&
                 (G.handCount[0] - handCount_prev[0] == -1) &&
@@ -226,11 +226,11 @@ int main() {
     playedCount_prev = G.playedCardCount;
     curse_qty_Prev = G.supplyCount[curse];
 
-    //display_state(&G);    
+    display_state(&G);    
     
     return_val = _sea_hag(0, &G);
     
-    //display_state(&G);    
+    display_state(&G);    
     
     result =  ( (return_val == 0) &&
                 (G.handCount[0] - handCount_prev[0] == -1) &&
