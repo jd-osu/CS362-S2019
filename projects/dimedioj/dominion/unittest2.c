@@ -135,7 +135,7 @@ int main() {
 
     //display_state(&G);
     
-    printf("return=%d\n", return_val);
+    //printf("return=%d\n", return_val);
     
     result =  ( (return_val == -1)
               );
