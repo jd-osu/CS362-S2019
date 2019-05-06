@@ -123,7 +123,7 @@ int main() {
     display_state(&G);    
     
     result =  ( (return_val == 0) &&
-                (G.handCount[0] - handCount_prev == -1) &&
+                (G.handCount[0] - handCount_prev[0] == -1) &&
                 (G.deck[0][G.deckCount[0]-1] != curse) &&
                 (G.deck[1][G.deckCount[0]-1] == curse) &&
                 (G.deckCount[1] - deckCount_prev[1] == 0) &&
