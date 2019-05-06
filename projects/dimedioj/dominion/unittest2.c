@@ -166,11 +166,11 @@ int main() {
     card2 = G.deck[0][G.deckCount[0]-2];
     card3 = G.deck[0][G.deckCount[0]-3];
 
-    display_state(&G);
+    //display_state(&G);
     
     return_val = _smithy(0, &G, smithy_idx);
 
-    display_state(&G);
+    //display_state(&G);
     
     result =  ( (return_val == 0) &&
                 (G.handCount[0] - handCount_prev == 3-1) &&
