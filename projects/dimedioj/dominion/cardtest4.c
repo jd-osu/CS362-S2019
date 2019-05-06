@@ -171,11 +171,11 @@ int main() {
     coins_prev = G.coins;
     buys_prev = G.numBuys;
     
-    display_state(&G);    
+    //display_state(&G);    
     
     return_val = cardEffect(salvager, c1_idx, 0, 0, &G, salv_idx, bonus);
     
-    display_state(&G);
+    //display_state(&G);
     
     c1_salv_result = false;
     for (i=0; i<G.handCount[0]; i++)
