@@ -85,7 +85,7 @@ int main() {
 
     // ************************************************************************************
     //TEST1
-    const char test1[] = "players=2, curse supply >0, deck>0";
+    const char test1[] = "players=2, curse supply >0, deck>0, p1's top card != curse";
 
     numPlayer = 2;
 
@@ -122,17 +122,17 @@ int main() {
     
     display_state(&G);    
     
-/*    result =  ( (return_val == 0) &&
+    result =  ( (return_val == 0) &&
                 (G.handCount[0] - handCount_prev == -1) &&
+                (G.deck[0][G.deckCount[0]-1] != curse) &&
+                (G.deck[1][G.deckCount[0]-1] == curse) &&
+                (G.deckCount[1] - deckCount_prev[1] == 0) &&
                 (G.playedCardCount - playedCount_prev == 1) &&
-                (G.discardCount[0] - discardCount_prev == 0) &&
-                (c2_result) &&
-                (G.supplyCount[c2] - c2_qty_Prev == -1)
+                (G.discardCount[1] - discardCount_prev[1] == 1) &&
+                (G.supplyCount[curse] - curse_qty_Prev == -1)
               );
 
     _assert(result, test1);
-*/    
-    
    
     return 0;
 }
