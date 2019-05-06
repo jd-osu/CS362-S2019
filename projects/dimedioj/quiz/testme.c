@@ -5,14 +5,24 @@
 
 char inputChar()
 {
-    // TODO: rewrite this function
-    return ' ';
+  char random_char = 32 + (rand() % 94);
+   
+  return random_char;
 }
 
 char *inputString()
 {
-    // TODO: rewrite this function
-    return "";
+  static char random_str[5];
+  int i;
+
+  for (i=0; i < 5; i++)
+  {
+    random_str[i] = 100 + (rand() % 17);
+  }
+
+  random_str[5] = '\0';
+
+  return random_str;
 }
 
 void testme()
