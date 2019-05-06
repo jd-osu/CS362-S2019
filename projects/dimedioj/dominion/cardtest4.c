@@ -77,7 +77,7 @@ int main() {
 
     int handCount_prev, deckCount_prev, discardCount_prev, playedCount_prev, coins_prev, buys_prev;
     
-    int c1, c1_idx, salv_idx;
+    int c1, c1_idx, c1_cost, salv_idx;
     
     int *bonus;
     
@@ -112,7 +112,7 @@ int main() {
     discardCount_prev = G.discardCount[0];
     playedCount_prev = G.playedCardCount;
     coins_prev = G.coins;
-    buys_prev = G.buys;
+    buys_prev = G.numBuys;
     
     display_state(&G);    
     
