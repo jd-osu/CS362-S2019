@@ -46,7 +46,7 @@ void display_state(struct gameState *state)
   printf("\n");
   
   printf("SUPPLY:\n");
-  for (i=0; i<=treasure_map; i++)
+  for (i=0; i<=0; i++)
     printf("%d : %d\n", i, state->supplyCount[i]);
   printf("\n");
 }
