@@ -116,11 +116,11 @@ int main() {
     playedCount_prev = G.playedCardCount;
     curse_qty_Prev = G.supplyCount[curse];
 
-    display_state(&G);    
+    //display_state(&G);    
     
     return_val = _sea_hag(0, &G);
     
-    display_state(&G);    
+    //display_state(&G);    
     
     result =  ( (return_val == 0) &&
                 (G.handCount[0] - handCount_prev[0] == -1) &&
@@ -133,6 +133,64 @@ int main() {
               );
 
     _assert(result, test1);
+    
+    
+    // ************************************************************************************
+    //TEST2
+    const char test2[] = "players=4, curse supply >0, deck>0, p1's top card != curse";
+
+    numPlayer = 4;
+
+    // clear the game state
+    memset(&G, 23, sizeof(struct gameState));
+
+    // initialize new game
+    initializeGame(numPlayer, k, seed, &G);
+
+    hag_idx = 0;
+    //curse_qty =
+    p2_deck = 5;
+    p2_discard = 5;
+    G.hand[0][hag_idx] = sea_hag;
+
+    for (p=1; p<G.numPlayers; p++)
+    { 
+      G.deckCount[p] = p2_deck;
+      G.discardCount[p] = p2_discard;
+    }
+
+    for (p=0; p<G.numPlayers; p++)
+    { 
+      handCount_prev[p] = G.handCount[p];
+      deckCount_prev[p] = G.deckCount[p];
+      discardCount_prev[p] = G.discardCount[p];
+    }
+    playedCount_prev = G.playedCardCount;
+    curse_qty_Prev = G.supplyCount[curse];
+
+    display_state(&G);    
+    
+    return_val = _sea_hag(0, &G);
+    
+    display_state(&G);    
+    
+    result =  ( (return_val == 0) &&
+                (G.handCount[0] - handCount_prev[0] == -1) &&
+                (G.deck[0][G.deckCount[0]-1] != curse) &&
+                (G.deck[1][G.deckCount[0]-1] == curse) &&
+                (G.deckCount[1] - deckCount_prev[1] == 0) &&
+                (G.discardCount[1] - discardCount_prev[1] == 1) &&
+                (G.deck[2][G.deckCount[0]-1] == curse) &&
+                (G.deckCount[2] - deckCount_prev[2] == 0) &&
+                (G.discardCount[2] - discardCount_prev[2] == 1) &&                
+                (G.deck[3][G.deckCount[0]-1] == curse) &&
+                (G.deckCount[3] - deckCount_prev[3] == 0) &&
+                (G.discardCount[3] - discardCount_prev[3] == 1) &&
+                (G.playedCardCount - playedCount_prev == 1) &&
+                (G.supplyCount[curse] - curse_qty_Prev == -3)
+              );
+
+    _assert(result, test2);
    
     return 0;
 }
