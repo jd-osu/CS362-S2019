@@ -28,15 +28,15 @@ void display_state(struct gameState *state)
   {
     printf("player: %d\n", p);
     
-    printf("HAND: %d\n", state->handCount[0]);
-    for (i=0; i<state->handCount[0]; i++)
-      printf("%d : %d\n", i, state->hand[0][i]);
-    printf("DECK: %d\n", state->deckCount[0]);
-    for (i=0; i<state->deckCount[0]; i++)
-      printf("%d : %d\n", i, state->deck[0][i]);
-    printf("DISCARD: %d\n", state->discardCount[0]);
-    for (i=0; i<state->discardCount[0]; i++)
-      printf("%d : %d\n", i, state->discard[0][i]);
+    printf("HAND: %d\n", state->handCount[p]);
+    for (i=0; i<state->handCount[p]; i++)
+      printf("%d : %d\n", i, state->hand[p][i]);
+    printf("DECK: %d\n", state->deckCount[p]);
+    for (i=0; i<state->deckCount[p]; i++)
+      printf("%d : %d\n", i, state->deck[p][i]);
+    printf("DISCARD: %d\n", state->discardCount[p]);
+    for (i=0; i<state->discardCount[p]; i++)
+      printf("%d : %d\n", i, state->discard[p][i]);
     printf("\n"); 
   }
   
