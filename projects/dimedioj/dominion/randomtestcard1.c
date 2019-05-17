@@ -51,6 +51,17 @@ void display_state(struct gameState *state)
     printf("%d : %d\n", i, state->discard[0][i]);
   printf("\n");
   
+  printf("PLAYED: %d\n", state->playedCardCount);
+  for (i=0; i<state->playedCardCount; i++)
+    printf("%d : %d\n", i, state->playedCards[i]);
+  printf("\n");
+  
+  printf("BUYS: %d\n", state->numBuys);
+  printf("\n");
+  
+  printf("COINS: %d\n", state->coins);
+  printf("\n");
+  
 }
 
 
@@ -149,11 +160,11 @@ void test_run()
   printf("selected_card=%d\n", selected_card);
   printf("selected_card_cost=%d\n", selected_card_cost);  
   
+
+
+
+  display_state(&G);
 /*
-
-
-  //display_state(&G);
-
 
   return_val = _adventurer(0, &G);
   //printf("return_val=%d\n", return_val);
