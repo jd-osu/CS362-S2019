@@ -192,7 +192,7 @@ void test_run()
   printf("num_tr_found=%d\n", num_tr_found);
   printf("eval_tr=%d\n", eval_tr);
   
-  display_state(&G);
+  //display_state(&G);
 
   return_val = _adventurer(0, &G);
   printf("return_val=%d\n", return_val);
