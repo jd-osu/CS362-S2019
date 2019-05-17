@@ -93,7 +93,12 @@ void test_run()
     
   int num_tr, eval_tr, tr1, tr2, tr1_idx, tr2_idx;
   int num_total, num_deck, num_hand, num_discard;
-  int num_deck_tr, num_hand_tr, num_discard_tr, num_deck_tr_prev, num_hand_tr_prev, num_discard_tr_prev;
+  int num_deck_tr = 0;
+  int num_hand_tr = 0;
+  int num_discard_tr = 0;
+  int num_deck_tr_prev = 0;
+  int num_hand_tr_prev = 0;
+  int num_discard_tr_prev = 0;
     
   int return_val;
     
