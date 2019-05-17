@@ -105,6 +105,7 @@ void test_run()
   int num_total, num_total_prev, num_deck, num_deck_prev, num_hand, num_hand_prev, num_discard, num_discard_prev;
   int coins_prev, coins, eval_coins;
   int buys_prev, buys, eval_buys;
+  int eval_trash;
     
   int return_val;
     
@@ -155,60 +156,57 @@ void test_run()
   G.coins = coins_prev;
   G.numBuys = buys_prev;
 
-  selected_card = G.hand[0][selected_card_idx];
-  selected_card_cost = getCost(selected_card);
-  eval_coins = coins_prev + selected_card_cost;
+  if (num_hand_prev > 0)
+  {
+	selected_card = G.hand[0][selected_card_idx];
+    selected_card_cost = getCost(selected_card);
+	eval_coins = selected_card_cost;
+	eval_trash = -1;
+  }
+  else
+  {
+	selected_card = -1;
+	selected_card_cost = -99999;
+	eval_coins = 0;
+	eval_trash = 0;
+  }
+
   eval_buys = buys_prev + 1;
   printf("selected_card=%d\n", selected_card);
   printf("selected_card_cost=%d\n", selected_card_cost);  
   printf("eval_coins=%d\n", eval_coins);
-  printf("eval_buys=%d\n", eval_buys);    
+  printf("eval_buys=%d\n", eval_buys);
+  printf("eval_trash=%d\n", eval_trash);   
 
 
 
   //display_state(&G);
-/*
 
-  return_val = _adventurer(0, &G);
-  //printf("return_val=%d\n", return_val);
+
+  return_val = _salvager(0, &G, );
+  printf("return_val=%d\n", return_val);
 
   // get resulting data
   num_deck = G.deckCount[0];
   num_hand = G.handCount[0];
   num_discard = G.discardCount[0];
   num_total = num_deck + num_hand + num_discard;
-  //printf("num_total=%d\n", num_total);
-  //printf("num_deck=%d\n", num_deck);
-  //printf("num_hand=%d\n", num_hand);
-  //printf("num_discard=%d\n", num_discard);
+  printf("num_total=%d\n", num_total);
+  printf("num_deck=%d\n", num_deck);
+  printf("num_hand=%d\n", num_hand);
+  printf("num_discard=%d\n", num_discard);
   
-  // count how many treasures are in each pile
-  for (i = 0; i < G.deckCount[0]; i++)
-  {
-	  if (G.deck[0][i] > 3 && G.deck[0][i] < 7)
-		  num_deck_tr++;
-  }
+  coins = G.coins;
+  buys = G.numBuys;
+  printf("buys=%d\n", buys);
+  printf("coins=%d\n", coins);
 
-  for (i = 0; i < G.handCount[0]; i++)
-  {
-	  if (G.hand[0][i] > 3 && G.hand[0][i] < 7)
-		  num_hand_tr++;
-  }      
-	  
-  for (i = 0; i < G.discardCount[0]; i++)
-  {
-	  if (G.discard[0][i] > 3 && G.discard[0][i] < 7)
-		  num_discard_tr++;
-  }
-  //printf("num_deck_tr=%d\n", num_deck_tr);
-  //printf("num_hand_tr=%d\n", num_hand_tr);
-  //printf("num_discard_tr=%d\n", num_discard_tr);
-
+/*
   // evaluate result
   result = 	(	(return_val != 0) ||
   
 				(	(return_val == 0) &&
-					(num_total_prev == num_total) &&
+					(num_total_prev == num_total + eval_trash) &&
 					(avail_tr == num_deck_tr + num_discard_tr + eval_tr) &&
 					(num_hand == num_hand_prev + eval_tr) &&
 					(num_hand_tr == num_hand_tr_prev + eval_tr) &&
