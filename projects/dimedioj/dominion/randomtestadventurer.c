@@ -316,7 +316,7 @@ int main() {
     _assert(result, test3);
     
   */
-
+	srand(time(NULL));
 	test_run();
   
     return 0;
