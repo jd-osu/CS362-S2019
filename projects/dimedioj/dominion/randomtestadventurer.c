@@ -168,6 +168,8 @@ void test_run()
   num_tr_found = 0;
 
   // find the treasures in the deck
+  tr1 = -1;
+  tr2 = -1;
   for (i = G.deckCount[0]-1; i >= 0; i--)
   {
 	  if (G.deck[0][i] > 3 && G.deck[0][i] < 7)
@@ -239,9 +241,26 @@ void test_run()
   printf("hand1=%d\n", hand1);
   printf("hand2=%d\n", hand2);
   
+
+  // evaluate result
+  result = 	(	(return_val != 0) ||
+  
+				(	(return_val == 0) &&
+					(num_deck + eval_tr + (num_discard - num_discard_prev) == num_deck_prev) &&
+					(num_deck_tr_prev == num_deck_tr + eval_tr) &&
+					(num_hand == num_hand_prev + eval_tr) &&
+					(num_hand_tr == num_hand_tr_prev + eval_tr) &&
+					(num_discard_tr_prev == num_discard_tr) &&
+					(num_total_prev == num_total) &&
+					(tr1 == hand1) &&
+					(tr2 == hand2)
+				)
+			);
+  printf("result=%d\n", result);
+  
   
 /*    
-  //display_state(&G);    
+  //display_state(&G);
     
   result =  ( (return_val == 0) &&
               (G.handCount[0] - handCount_prev == num_tr) &&
