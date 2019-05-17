@@ -120,10 +120,10 @@ void test_run()
   num_deck_prev = get_random_number(0, num_total_prev);
   num_discard_prev = get_random_number(0, num_total_prev - num_deck_prev);
   num_hand_prev = num_total_prev - num_deck_prev - num_discard_prev;
-  printf("num_total_prev=%d\n", num_total_prev);
-  printf("num_deck_prev=%d\n", num_deck_prev);
-  printf("num_hand_prev=%d\n", num_hand_prev);
-  printf("num_discard_prev=%d\n", num_discard_prev);
+  //printf("num_total_prev=%d\n", num_total_prev);
+  //printf("num_deck_prev=%d\n", num_deck_prev);
+  //printf("num_hand_prev=%d\n", num_hand_prev);
+  //printf("num_discard_prev=%d\n", num_discard_prev);
   
   // modify new game based on random parameters  
   G.deckCount[0] = num_deck_prev;
@@ -168,11 +168,11 @@ void test_run()
 	  eval_tr = 0;
   
 
-  printf("num_deck_tr_prev=%d\n", num_deck_tr_prev);
-  printf("num_hand_tr_prev=%d\n", num_hand_tr_prev);
-  printf("num_discard_tr_prev=%d\n", num_discard_tr_prev);
-  printf("avail_tr=%d\n", avail_tr);
-  printf("eval_tr=%d\n", eval_tr);
+  //printf("num_deck_tr_prev=%d\n", num_deck_tr_prev);
+  //printf("num_hand_tr_prev=%d\n", num_hand_tr_prev);
+  //printf("num_discard_tr_prev=%d\n", num_discard_tr_prev);
+  //printf("avail_tr=%d\n", avail_tr);
+  //printf("eval_tr=%d\n", eval_tr);
   
   //display_state(&G);
 
@@ -185,10 +185,10 @@ void test_run()
   num_hand = G.handCount[0];
   num_discard = G.discardCount[0];
   num_total = num_deck + num_hand + num_discard;
-  printf("num_total=%d\n", num_total);
-  printf("num_deck=%d\n", num_deck);
-  printf("num_hand=%d\n", num_hand);
-  printf("num_discard=%d\n", num_discard);
+  //printf("num_total=%d\n", num_total);
+  //printf("num_deck=%d\n", num_deck);
+  //printf("num_hand=%d\n", num_hand);
+  //printf("num_discard=%d\n", num_discard);
   
   // count how many treasures are in each pile
   for (i = 0; i < G.deckCount[0]; i++)
@@ -208,9 +208,9 @@ void test_run()
 	  if (G.discard[0][i] > 3 && G.discard[0][i] < 7)
 		  num_discard_tr++;
   }
-  printf("num_deck_tr=%d\n", num_deck_tr);
-  printf("num_hand_tr=%d\n", num_hand_tr);
-  printf("num_discard_tr=%d\n", num_discard_tr);
+  //printf("num_deck_tr=%d\n", num_deck_tr);
+  //printf("num_hand_tr=%d\n", num_hand_tr);
+  //printf("num_discard_tr=%d\n", num_discard_tr);
 
   // evaluate result
   result = 	(	(return_val != 0) ||
@@ -224,7 +224,7 @@ void test_run()
 					(num_deck_tr_prev + num_hand_tr_prev + num_discard_tr_prev == num_deck_tr + num_hand_tr + num_discard_tr)
 				)
 			);
-  printf("result=%d\n", result);
+  //printf("result=%d\n", result);
   
   
     
