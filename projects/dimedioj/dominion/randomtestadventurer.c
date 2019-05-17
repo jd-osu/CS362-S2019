@@ -57,12 +57,12 @@ void display_state(struct gameState *state)
 
 int _assert(bool condition, const char *test_name)
 {
-  printf("%s: ", FUNCTION);
+  //printf("%s: ", FUNCTION);
   
   if (condition == true);
     //printf("%s", PASS);
   else
-    printf("%s when %s\n", FAIL, test_name);
+    printf("%s: %s when %s\n", FUNCTION, FAIL, test_name);
   
   //printf(" when %s\n", test_name);
 }
