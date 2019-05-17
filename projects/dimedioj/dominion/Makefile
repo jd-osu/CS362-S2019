@@ -77,6 +77,13 @@ unittestresults: unittest1.c unittest2.c unittest3.c unittest4.c cardtest1.c car
 	./cardtest4 >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
 
+randomtestresults: randomtestadventurer.c dominion.c rngs.c
+	echo "Result for running random tests:" > randomtestresults.out
+	echo "randomtestadventurer.c:" >> randomtestresults.out
+	gcc -o randomtestadventurer -g randomtestadventurer.c dominion.c rngs.c -coverage -lm
+	./randomtestadventurer >> randomtestresults.out
+	gcov dominion.c >> randomtestresults.out
+
 randomtestadventurer: randomtestadventurer.c dominion.c rngs.c
 	gcc -o randomtestadventurer -g randomtestadventurer.c dominion.c rngs.c -lm
 
