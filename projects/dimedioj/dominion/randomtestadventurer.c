@@ -91,7 +91,7 @@ void test_run()
 
   int handCount_prev, deckCount_prev, discardCount_prev;
     
-  int num_tr, eval_tr, tr1, tr2, tr1_idx, tr2_idx;
+  int num_tr_found, eval_tr, tr1, tr2, tr1_idx, tr2_idx;
   int num_total, num_deck, num_hand, num_discard;
   int num_deck_tr = 0;
   int num_hand_tr = 0;
@@ -128,7 +128,8 @@ void test_run()
   G.deckCount[0] = num_deck;
   G.handCount[0] = num_hand;
   G.discardCount[0] = num_discard;
-	
+
+  // populate deck, hand and discard with random cards	
   for (i = 0; i < G.deckCount[0]; i++)
     G.deck[0][i] = get_random_card();
 
@@ -138,6 +139,7 @@ void test_run()
   for (i = 0; i < G.discardCount[0]; i++)
     G.discard[0][i] = get_random_card();
 
+  // count how many treasures are in each pile
   for (i = 0; i < G.deckCount[0]; i++)
   {
 	  if (G.deck[0][i] > 3 && G.deck[0][i] < 7)
@@ -156,9 +158,39 @@ void test_run()
 		  num_discard_tr_prev++;
   }
 
+  if (num_deck_tr_prev >= 2)
+	  eval_tr = 2;
+  else if (num_deck_tr_prev == 1)
+	  eval_tr = 1;
+  else
+	  eval_tr = 0;
+  
+  num_tr_found = 0;
+
+  // find the treasures in the deck
+  for (i = G.deckCount[0]-1; i >= 0; i--)
+  {
+	  if (G.deck[0][i] > 3 && G.deck[0][i] < 7)
+	  {
+		num_tr_found++;
+		
+		if (num_tr_found == 1)
+			tr1 = G.deck[0][i];
+		else if (num_tr_found == 2)
+		{
+			tr2 = G.deck[0][i];
+			break;
+		}
+	  }
+  }
+
   printf("num_deck_tr_prev=%d\n", num_deck_tr_prev);
   printf("num_hand_tr_prev=%d\n", num_hand_tr_prev);
   printf("num_discard_tr_prev=%d\n", num_discard_tr_prev);
+  printf("tr1=%d\n", tr1);
+  printf("tr2=%d\n", tr2);
+  printf("num_tr_found=%d\n", num_tr_found);
+  printf("eval_tr=%d\n", eval_tr);
   
   display_state(&G);
 
