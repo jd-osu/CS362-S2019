@@ -112,7 +112,7 @@ void test_run()
   // modify new game based on random parameters
   num_total = get_random_number(0,500);
   num_hand = get_random_number(0,num_total);
-  num_discard = get_random_count(0, num_total-num_discard);
+  num_discard = get_random_number(0, num_total-num_discard);
   printf("num_total=%d\n", num_total);
   printf("num_hand=%d\n", num_hand);
   printf("num_discard=%d\n", num_discard);
