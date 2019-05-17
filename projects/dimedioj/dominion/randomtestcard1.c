@@ -103,8 +103,8 @@ void test_run()
     
   int selected_card_idx, selected_card, selected_card_cost;
   int num_total, num_total_prev, num_deck, num_deck_prev, num_hand, num_hand_prev, num_discard, num_discard_prev;
-  int coins_prev, coins;
-  int buys_prev, buys;
+  int coins_prev, coins, eval_coins;
+  int buys_prev, buys, eval_buys;
     
   int return_val;
     
@@ -157,9 +157,12 @@ void test_run()
 
   selected_card = G.hand[0][selected_card_idx];
   selected_card_cost = getCost(selected_card);
+  eval_coins = coins_prev + selected_card_cost;
+  eval_buys = buys_prev + 1;
   printf("selected_card=%d\n", selected_card);
   printf("selected_card_cost=%d\n", selected_card_cost);  
-  
+  printf("eval_coins=%d\n", eval_coins);
+  printf("eval_buys=%d\n", eval_buys);    
 
 
 
