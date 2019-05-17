@@ -21,6 +21,7 @@
 
 #define MAX_HAND 500
 #define MAX_DECK 500
+#define MAX_STR 1000
 
 #define MAX_PLAYERS 4
 
@@ -106,7 +107,7 @@ void test_run()
 
   // ************************************************************************************
   //TEST1
-  const char test1[] = "1st 2 cards of deck are treasure cards";
+  const char test[MAX_STR];
 
   // clear the game state
   memset(&G, 23, sizeof(struct gameState));
@@ -196,6 +197,9 @@ void test_run()
   
   //display_state(&G);
 
+
+
+
   return_val = _adventurer(0, &G);
   printf("return_val=%d\n", return_val);
 
@@ -259,7 +263,7 @@ void test_run()
   printf("result=%d\n", result);
   
   
-/*    
+    
   //display_state(&G);
     
   result =  ( (return_val == 0) &&
@@ -270,8 +274,19 @@ void test_run()
               (G.deckCount[0] + G.discardCount[0] - deckCount_prev - discardCount_prev == -2)
             );
 
-    _assert(result, test1);
-	*/
+  // set up print string
+  sprintf(test, "(deck:%d,%d_tr|hand:%d,%d_tr|discard:%d,%d_tr)->(deck:%d,%d_tr|hand:%d,%d_tr|discard:%d,%d_tr); return=%d",
+					num_deck_prev, num_deck_tr_prev,
+					num_hand_prev, num_hand_tr_prev,
+					num_discard_prev, num_discard_tr_prev,
+					num_deck, num_deck_tr,
+					num_hand, num_hand_tr,
+					num_discard, num_discard_tr,
+					return_val);
+
+
+    _assert(result, test);
+	
 }
 
 int main() {
