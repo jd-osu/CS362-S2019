@@ -60,11 +60,11 @@ int _assert(bool condition, const char *test_name)
   printf("%s: ", FUNCTION);
   
   if (condition == true)
-    printf("%s", PASS);
+    //printf("%s", PASS);
   else
-    printf("%s", FAIL);
+    printf("%s when %s\n", FAIL, test_name);
   
-  printf(" when %s\n", test_name);
+  //printf(" when %s\n", test_name);
 }
 
 int get_random_number(int low, int high)
