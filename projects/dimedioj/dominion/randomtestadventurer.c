@@ -266,14 +266,6 @@ void test_run()
     
   //display_state(&G);
     
-  result =  ( (return_val == 0) &&
-              (G.handCount[0] - handCount_prev == num_tr) &&
-              (num_tr <= 2) &&
-              (G.handCount[0] - handCount_prev == num_tr) &&
-              ((G.hand[0][G.handCount[0]-2] == tr1) && (G.hand[0][G.handCount[0]-1] == tr2)) &&
-              (G.deckCount[0] + G.discardCount[0] - deckCount_prev - discardCount_prev == -2)
-            );
-
   // set up print string
   sprintf(test, "(deck:%d,%d_tr|hand:%d,%d_tr|discard:%d,%d_tr)->(deck:%d,%d_tr|hand:%d,%d_tr|discard:%d,%d_tr); return=%d",
 					num_deck_prev, num_deck_tr_prev,
