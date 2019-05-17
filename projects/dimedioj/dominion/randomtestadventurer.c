@@ -178,7 +178,7 @@ void test_run()
 
 
   return_val = _adventurer(0, &G);
-  printf("return_val=%d\n", return_val);
+  //printf("return_val=%d\n", return_val);
 
   // get resulting data
   num_deck = G.deckCount[0];
