@@ -163,7 +163,7 @@ void test_run()
 
 
 
-  display_state(&G);
+  //display_state(&G);
 /*
 
   return_val = _adventurer(0, &G);
