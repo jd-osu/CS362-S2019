@@ -159,6 +159,8 @@ void test_run()
   printf("num_deck_tr_prev=%d\n", num_deck_tr_prev);
   printf("num_hand_tr_prev=%d\n", num_hand_tr_prev);
   printf("num_discard_tr_prev=%d\n", num_discard_tr_prev);
+  
+  display_state(&G);
 
   /*
   tr1 = 4;
