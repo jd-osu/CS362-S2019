@@ -80,7 +80,7 @@ unittestresults: unittest1.c unittest2.c unittest3.c unittest4.c cardtest1.c car
 randomtestresults: randomtestadventurer.c dominion.c rngs.c
 	echo "Result for running random tests:" > randomtestresults.out
 	echo " " > randomtestresults.out
-	echo "--------------------------------------------------------------------------------------------" >> randomtestresults.out
+	echo "--------------------------------------------------------------------------------------------" > randomtestresults.out
 	echo "randomtestadventurer.c:" >> randomtestresults.out
 	gcc -o randomtestadventurer -g randomtestadventurer.c dominion.c rngs.c -coverage -lm
 	./randomtestadventurer >> randomtestresults.out
