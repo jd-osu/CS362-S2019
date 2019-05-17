@@ -106,8 +106,8 @@ void test_run()
   bool result;
 
   // ************************************************************************************
-  //TEST1
-  const char test[MAX_STR];
+  //TEST
+  char test[MAX_STR];
 
   // clear the game state
   memset(&G, 23, sizeof(struct gameState));
