@@ -91,8 +91,8 @@ void test_run()
 
   int handCount_prev, deckCount_prev, discardCount_prev;
     
-  int num_tr_found, eval_tr, tr1, tr2, tr1_idx, tr2_idx;
-  int num_total, num_deck, num_hand, num_discard;
+  int num_tr_found, eval_tr, tr1, tr2, hand1, hand2;
+  int num_total, num_total_prev, num_deck, num_deck_prev, num_hand, num_hand_prev, num_discard, num_discard_prev;
   int num_deck_tr = 0;
   int num_hand_tr = 0;
   int num_discard_tr = 0;
@@ -115,19 +115,19 @@ void test_run()
   initializeGame(numPlayer, k, seed, &G);
 
   // generate random parameters
-  num_total = get_random_number(0,500);
-  num_deck = get_random_number(0, num_total);
-  num_discard = get_random_number(0, num_total - num_deck);
-  num_hand = num_total - num_deck - num_discard;
-  printf("num_total=%d\n", num_total);
-  printf("num_deck=%d\n", num_deck);
-  printf("num_hand=%d\n", num_hand);
-  printf("num_discard=%d\n", num_discard);
+  num_total_prev = get_random_number(0,500);
+  num_deck_prev = get_random_number(0, num_total_prev);
+  num_discard_prev = get_random_number(0, num_total_prev - num_deck_prev);
+  num_hand_prev = num_total_prev - num_deck_prev - num_discard_prev;
+  printf("num_total_prev=%d\n", num_total_prev);
+  printf("num_deck_prev=%d\n", num_deck_prev);
+  printf("num_hand_prev=%d\n", num_hand_prev);
+  printf("num_discard_prev=%d\n", num_discard_prev);
   
   // modify new game based on random parameters  
-  G.deckCount[0] = num_deck;
-  G.handCount[0] = num_hand;
-  G.discardCount[0] = num_discard;
+  G.deckCount[0] = num_deck_prev;
+  G.handCount[0] = num_hand_prev;
+  G.discardCount[0] = num_discard_prev;
 
   // populate deck, hand and discard with random cards	
   for (i = 0; i < G.deckCount[0]; i++)
@@ -194,23 +194,53 @@ void test_run()
   
   display_state(&G);
 
-  /*
-  tr1 = 4;
-  tr2 = 5;
-  tr1_idx = G.deckCount[0]-1;
-  tr2_idx = G.deckCount[0]-2;
-
-  G.deck[0][tr1_idx] = tr1;
-  G.deck[0][tr2_idx] = tr2;
-    
-  handCount_prev = G.handCount[0];
-  deckCount_prev = G.deckCount[0];
-  discardCount_prev = G.discardCount[0];
-    
-  //display_state(&G);    
-    
   return_val = _adventurer(0, &G);
-    
+  printf("return_val=%d\n", return_val);
+
+  // get resulting data
+  num_deck = G.deckCount[0];
+  num_hand = G.handCount[0];
+  num_discard = G.discardCount[0];
+  num_total = num_deck + num_hand + num_discard;
+  printf("num_total=%d\n", num_total);
+  printf("num_deck=%d\n", num_deck);
+  printf("num_hand=%d\n", num_hand);
+  printf("num_discard=%d\n", num_discard);
+  
+  // count how many treasures are in each pile
+  for (i = 0; i < G.deckCount[0]; i++)
+  {
+	  if (G.deck[0][i] > 3 && G.deck[0][i] < 7)
+		  num_deck_tr++;
+  }
+
+  for (i = 0; i < G.handCount[0]; i++)
+  {
+	  if (G.hand[0][i] > 3 && G.hand[0][i] < 7)
+		  num_hand_tr++;
+  }      
+	  
+  for (i = 0; i < G.discardCount[0]; i++)
+  {
+	  if (G.discard[0][i] > 3 && G.discard[0][i] < 7)
+		  num_discard_tr++;
+  }
+  printf("num_deck_tr=%d\n", num_deck_tr);
+  printf("num_hand_tr=%d\n", num_hand_tr);
+  printf("num_discard_tr=%d\n", num_discard_tr);
+
+  // get 1-2 most recently added cards to hand
+  hand1 = -1;
+  hand2 = -1;
+  if (G.handCount[0] >= 2)
+    hand1 = G.hand[0][G.handCount[0]-2];
+  if (G.handCount[0] >= 1)
+	  hand2 = G.hand[0][G.handCount[0]-1];
+  printf("hand1=%d\n", hand1);
+  printf("hand2=%d\n", hand2);
+  
+  
+/*    
   //display_state(&G);    
     
   result =  ( (return_val == 0) &&
