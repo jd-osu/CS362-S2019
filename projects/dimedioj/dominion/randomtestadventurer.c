@@ -92,7 +92,7 @@ void test_run()
 
   int handCount_prev, deckCount_prev, discardCount_prev;
     
-  int num_tr_found, eval_tr, tr1, tr2, hand1, hand2;
+  int eval_tr, avail_tr;
   int num_total, num_total_prev, num_deck, num_deck_prev, num_hand, num_hand_prev, num_discard, num_discard_prev;
   int num_deck_tr = 0;
   int num_hand_tr = 0;
@@ -146,58 +146,35 @@ void test_run()
 	  if (G.deck[0][i] > 3 && G.deck[0][i] < 7)
 		  num_deck_tr_prev++;
   }
-
   for (i = 0; i < G.handCount[0]; i++)
   {
 	  if (G.hand[0][i] > 3 && G.hand[0][i] < 7)
 		  num_hand_tr_prev++;
   }      
-	  
   for (i = 0; i < G.discardCount[0]; i++)
   {
 	  if (G.discard[0][i] > 3 && G.discard[0][i] < 7)
 		  num_discard_tr_prev++;
   }
 
-  if (num_deck_tr_prev >= 2)
+  avail_tr = num_deck_tr_prev + num_discard_tr_prev;
+
+
+  if (avail_tr >= 2)
 	  eval_tr = 2;
-  else if (num_deck_tr_prev == 1)
+  else if (avail_tr == 1)
 	  eval_tr = 1;
   else
 	  eval_tr = 0;
   
-  num_tr_found = 0;
-
-  // find the treasures in the deck
-  tr1 = -1;
-  tr2 = -1;
-  for (i = G.deckCount[0]-1; i >= 0; i--)
-  {
-	  if (G.deck[0][i] > 3 && G.deck[0][i] < 7)
-	  {
-		num_tr_found++;
-		
-		if (num_tr_found == 1)
-			tr1 = G.deck[0][i];
-		else if (num_tr_found == 2)
-		{
-			tr2 = G.deck[0][i];
-			break;
-		}
-	  }
-  }
 
   printf("num_deck_tr_prev=%d\n", num_deck_tr_prev);
   printf("num_hand_tr_prev=%d\n", num_hand_tr_prev);
   printf("num_discard_tr_prev=%d\n", num_discard_tr_prev);
-  printf("tr1=%d\n", tr1);
-  printf("tr2=%d\n", tr2);
-  printf("num_tr_found=%d\n", num_tr_found);
+  printf("avail_tr=%d\n", avail_tr);
   printf("eval_tr=%d\n", eval_tr);
   
   //display_state(&G);
-
-
 
 
   return_val = _adventurer(0, &G);
@@ -235,29 +212,16 @@ void test_run()
   printf("num_hand_tr=%d\n", num_hand_tr);
   printf("num_discard_tr=%d\n", num_discard_tr);
 
-  // get 1-2 most recently added cards to hand
-  hand1 = -1;
-  hand2 = -1;
-  if (G.handCount[0] >= 2)
-    hand1 = G.hand[0][G.handCount[0]-2];
-  if (G.handCount[0] >= 1)
-	  hand2 = G.hand[0][G.handCount[0]-1];
-  printf("hand1=%d\n", hand1);
-  printf("hand2=%d\n", hand2);
-  
-
   // evaluate result
   result = 	(	(return_val != 0) ||
   
 				(	(return_val == 0) &&
-					(num_deck + eval_tr + (num_discard - num_discard_prev) == num_deck_prev) &&
-					(num_deck_tr_prev == num_deck_tr + eval_tr) &&
+					(num_total_prev == num_total) &&
+					(avail_tr == num_deck_tr + num_discard_tr + eval_tr) &&
 					(num_hand == num_hand_prev + eval_tr) &&
 					(num_hand_tr == num_hand_tr_prev + eval_tr) &&
-					(num_discard_tr_prev == num_discard_tr) &&
-					(num_total_prev == num_total) &&
-					(tr1 == hand1) &&
-					(tr2 == hand2)
+					(num_deck_prev + num_discard_prev == num_deck + num_discard + eval_tr) &&
+					(num_deck_tr_prev + num_hand_tr_prev + num_discard_tr_prev == num_deck_tr + num_hand_tr + num_discard_tr)
 				)
 			);
   printf("result=%d\n", result);
