@@ -30,7 +30,7 @@ typedef enum {false, true} bool;
 
 const char PASS[] = "PASS";
 const char FAIL[] = "FAIL";
-const char FUNCTION[] = "_adventurer()";
+const char FUNCTION[] = "_salvager()";
 
 void display_state(struct gameState *state)
 {
@@ -89,17 +89,11 @@ void test_run()
   int k[10] = {adventurer, council_room, feast, gardens, mine
                , remodel, smithy, village, baron, great_hall};
   struct gameState G;
-
-  int handCount_prev, deckCount_prev, discardCount_prev;
     
-  int eval_tr, avail_tr;
+  int selected_card_idx, selected_card, selected_card_cost;
   int num_total, num_total_prev, num_deck, num_deck_prev, num_hand, num_hand_prev, num_discard, num_discard_prev;
-  int num_deck_tr = 0;
-  int num_hand_tr = 0;
-  int num_discard_tr = 0;
-  int num_deck_tr_prev = 0;
-  int num_hand_tr_prev = 0;
-  int num_discard_tr_prev = 0;
+  int coins_prev, coins;
+  int buys_prev, buys;
     
   int return_val;
     
@@ -120,10 +114,17 @@ void test_run()
   num_deck_prev = get_random_number(0, num_total_prev);
   num_discard_prev = get_random_number(0, num_total_prev - num_deck_prev);
   num_hand_prev = num_total_prev - num_deck_prev - num_discard_prev;
-  //printf("num_total_prev=%d\n", num_total_prev);
-  //printf("num_deck_prev=%d\n", num_deck_prev);
-  //printf("num_hand_prev=%d\n", num_hand_prev);
-  //printf("num_discard_prev=%d\n", num_discard_prev);
+  selected_card_idx = get_random_number(0, num_hand_prev - 1);
+  coins_prev = get_random_number(0, 100);
+  buys_prev = get_random_number(0, 100);
+
+  printf("num_total_prev=%d\n", num_total_prev);
+  printf("num_deck_prev=%d\n", num_deck_prev);
+  printf("num_hand_prev=%d\n", num_hand_prev);
+  printf("num_discard_prev=%d\n", num_discard_prev);
+  printf("selected_card_idx=%d\n", selected_card_idx);
+  printf("coins_prev=%d\n", coins_prev);
+  printf("buys_prev=%d\n", buys_prev);
   
   // modify new game based on random parameters  
   G.deckCount[0] = num_deck_prev;
@@ -140,40 +141,17 @@ void test_run()
   for (i = 0; i < G.discardCount[0]; i++)
     G.discard[0][i] = get_random_card();
 
-  // count how many treasures are in each pile
-  for (i = 0; i < G.deckCount[0]; i++)
-  {
-	  if (G.deck[0][i] > 3 && G.deck[0][i] < 7)
-		  num_deck_tr_prev++;
-  }
-  for (i = 0; i < G.handCount[0]; i++)
-  {
-	  if (G.hand[0][i] > 3 && G.hand[0][i] < 7)
-		  num_hand_tr_prev++;
-  }      
-  for (i = 0; i < G.discardCount[0]; i++)
-  {
-	  if (G.discard[0][i] > 3 && G.discard[0][i] < 7)
-		  num_discard_tr_prev++;
-  }
+  G.coins = coins_prev;
+  G.numBuys = buys_prev;
 
-  avail_tr = num_deck_tr_prev + num_discard_tr_prev;
-
-
-  if (avail_tr >= 2)
-	  eval_tr = 2;
-  else if (avail_tr == 1)
-	  eval_tr = 1;
-  else
-	  eval_tr = 0;
+  selected_card = G.hand[0][selected_card_idx];
+  selected_card_cost = getCost(selected_card);
+  printf("selected_card=%d\n", selected_card);
+  printf("selected_card_cost=%d\n", selected_card_cost);  
   
+/*
 
-  //printf("num_deck_tr_prev=%d\n", num_deck_tr_prev);
-  //printf("num_hand_tr_prev=%d\n", num_hand_tr_prev);
-  //printf("num_discard_tr_prev=%d\n", num_discard_tr_prev);
-  //printf("avail_tr=%d\n", avail_tr);
-  //printf("eval_tr=%d\n", eval_tr);
-  
+
   //display_state(&G);
 
 
@@ -242,13 +220,13 @@ void test_run()
 
 
     _assert(result, test);
-	
+	*/
 }
 
 int main() {
   srand(time(NULL));
 
-  int trials = 1000;
+  int trials = 1;
   int current = 1;
   
   while (current <= trials)
