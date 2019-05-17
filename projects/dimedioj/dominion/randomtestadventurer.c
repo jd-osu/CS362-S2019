@@ -267,7 +267,7 @@ void test_run()
   //display_state(&G);
     
   // set up print string
-  sprintf(test, "(deck:%d,%d_tr|hand:%d,%d_tr|discard:%d,%d_tr)->(deck:%d,%d_tr|hand:%d,%d_tr|discard:%d,%d_tr); return=%d",
+  sprintf(test, "(deck:%d,%d|hand:%d,%d|discard:%d,%d)->(deck:%d,%d|hand:%d,%d|discard:%d,%d); return=%d",
 					num_deck_prev, num_deck_tr_prev,
 					num_hand_prev, num_hand_tr_prev,
 					num_discard_prev, num_discard_tr_prev,
