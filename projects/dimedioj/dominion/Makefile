@@ -82,7 +82,7 @@ randomtestresults: randomtestadventurer.c dominion.c rngs.c
 	echo "randomtestadventurer.c:" >> randomtestresults.out
 	gcc -o randomtestadventurer -g randomtestadventurer.c dominion.c rngs.c -coverage -lm
 	./randomtestadventurer >> randomtestresults.out
-	gcov dominion.c -f >> randomtestresults.out
+	gcov dominion.c -f -b >> randomtestresults.out
 
 randomtestadventurer: randomtestadventurer.c dominion.c rngs.c
 	gcc -o randomtestadventurer -g randomtestadventurer.c dominion.c rngs.c -lm
