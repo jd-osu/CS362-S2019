@@ -35,48 +35,6 @@ player: player.c interface.o
 
 all: playdom player 
 
-unittestresults: unittest1.c unittest2.c unittest3.c unittest4.c cardtest1.c cardtest2.c cardtest3.c cardtest4.c dominion.c rngs.c
-	echo "Result for running unit tests:" > unittestresults.out
-	echo "unittest1.c:" >> unittestresults.out
-	gcc -o unittest1 -g unittest1.c dominion.c rngs.c -coverage -lm
-	./unittest1 >> unittestresults.out
-	gcov dominion.c >> unittestresults.out
-
-	echo "unittest2.c:" >> unittestresults.out
-	gcc -o unittest2 -g unittest2.c dominion.c rngs.c -coverage -lm
-	./unittest2 >> unittestresults.out
-	gcov dominion.c >> unittestresults.out
-  
-	echo "unittest3.c:" >> unittestresults.out
-	gcc -o unittest3 -g unittest3.c dominion.c rngs.c -coverage -lm
-	./unittest3 >> unittestresults.out
-	gcov dominion.c >> unittestresults.out
-  
-	echo "unittest4.c:" >> unittestresults.out
-	gcc -o unittest4 -g unittest4.c dominion.c rngs.c -coverage -lm
-	./unittest4 >> unittestresults.out
-	gcov dominion.c >> unittestresults.out
-  
-	echo "cardtest1.c:" >> unittestresults.out
-	gcc -o cardtest1 -g cardtest1.c dominion.c rngs.c -coverage -lm
-	./cardtest1 >> unittestresults.out
-	gcov dominion.c >> unittestresults.out
-
-	echo "cardtest2.c:" >> unittestresults.out
-	gcc -o cardtest2 -g cardtest2.c dominion.c rngs.c -coverage -lm
-	./cardtest2 >> unittestresults.out
-	gcov dominion.c >> unittestresults.out
-
-	echo "cardtest3.c:" >> unittestresults.out
-	gcc -o cardtest3 -g cardtest3.c dominion.c rngs.c -coverage -lm
-	./cardtest3 >> unittestresults.out
-	gcov dominion.c >> unittestresults.out
-
-	echo "cardtest4.c:" >> unittestresults.out
-	gcc -o cardtest4 -g cardtest4.c dominion.c rngs.c -coverage -lm
-	./cardtest4 >> unittestresults.out
-	gcov dominion.c >> unittestresults.out
-
 randomtestresults: randomtestadventurer.c dominion.c rngs.c
 	echo "Result for running random tests:" > randomtestresults.out
 	echo " " >> randomtestresults.out
@@ -84,6 +42,14 @@ randomtestresults: randomtestadventurer.c dominion.c rngs.c
 	echo "randomtestadventurer.c:" >> randomtestresults.out
 	gcc -o randomtestadventurer -g randomtestadventurer.c dominion.c rngs.c -coverage -lm
 	./randomtestadventurer >> randomtestresults.out
+	echo " " >> randomtestresults.out
+	gcov dominion.c -f -b >> randomtestresults.out
+
+	echo " " >> randomtestresults.out
+	echo "--------------------------------------------------------------------------------------------" >> randomtestresults.out
+	echo "randomtestcard1.c:" >> randomtestresults.out
+	gcc -o randomtestcard1 -g randomtestcard1.c dominion.c rngs.c -coverage -lm
+	./randomtestcard1 >> randomtestresults.out
 	echo " " >> randomtestresults.out
 	gcov dominion.c -f -b >> randomtestresults.out
 
