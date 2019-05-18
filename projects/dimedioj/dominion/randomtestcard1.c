@@ -206,8 +206,8 @@ void test_run()
   //display_state(&G);
 
 
-//  return_val = _salvager(0, &G, salvager_pos, selected_card_idx);
-//  printf("return_val=%d\n", return_val);
+  return_val = _salvager(0, &G, salvager_pos, selected_card_idx);
+  printf("return_val=%d\n", return_val);
 
   // get resulting data
   num_deck = G.deckCount[0];
@@ -226,7 +226,6 @@ void test_run()
   printf("buys=%d\n", buys);
   printf("coins=%d\n", coins);
 
-  /* 
   // evaluate result
   result = 	(	(return_val != 0) ||
   
@@ -257,15 +256,16 @@ void test_run()
 					num_discard, num_discard_tr,
 					return_val);
 
+  printf("test=%s\n", test);
 
     //_assert(result, test);
-	*/
+
 }
 
 int main() {
   srand(time(NULL));
 
-  int trials = 100;
+  int trials = 1;
   int current = 1;
   
   while (current <= trials)
