@@ -231,7 +231,7 @@ void test_run()
 					(num_total_prev == num_total + eval_trash) &&
 					(num_hand_prev == num_hand + eval_trash + eval_played) &&
           (num_played == num_played_prev + eval_played) &&
-					(G.playedCards[playedCardCount-1] == salvager) &&
+					(G.playedCards[G.playedCardCount-1] == salvager) &&
 					(coins == coins_prev + eval_coins) &&
 					(buys == eval_buys) &&
 					(num_deck == num_deck_prev) &&
