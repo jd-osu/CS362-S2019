@@ -245,7 +245,7 @@ void test_run()
   
     
   //display_state(&G);
- 
+/* 
   // set up print string
   sprintf(test, "(deck:%d,%d|hand:%d,%d|discard:%d,%d)->(deck:%d,%d|hand:%d,%d|discard:%d,%d); return=%d",
 					num_deck_prev, num_deck_tr_prev,
@@ -257,7 +257,7 @@ void test_run()
 					return_val);
 
   printf("test=%s\n", test);
-
+*/
     //_assert(result, test);
 
 }
