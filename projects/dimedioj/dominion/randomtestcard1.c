@@ -184,10 +184,10 @@ void test_run()
   else
   {
     selected_card = -1;
-    selected_card_cost = -99999;
+    selected_card_cost = -9;
     eval_coins = 0;
     eval_trash = 0;
-    eval_played = -99999;
+    eval_played = -9;
   }
 
   eval_buys = buys_prev + 1;
