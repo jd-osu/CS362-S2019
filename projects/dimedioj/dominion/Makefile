@@ -35,29 +35,29 @@ player: player.c interface.o
 
 all: playdom player 
 
-randomtestresults: randomtestadventurer.c randomtestcard1.c salvager.c adventurer.c dominion.c rngs.c
+randomtestresults: randomtestadventurer.c dominion.c rngs.c
 	echo "Result for running random tests:" > randomtestresults.out
 	echo " " >> randomtestresults.out
 	echo "--------------------------------------------------------------------------------------------" >> randomtestresults.out
 	echo "randomtestadventurer.c:" >> randomtestresults.out
-	gcc -o randomtestadventurer -g randomtestadventurer.c adventurer.c dominion.c rngs.c -coverage -lm
+	gcc -o randomtestadventurer -g randomtestadventurer.c dominion.c rngs.c -coverage -lm
 	./randomtestadventurer >> randomtestresults.out
 	echo " " >> randomtestresults.out
-	gcov adventurer.c -f -b >> randomtestresults.out
+	gcov dominion.c -f -b >> randomtestresults.out
 
 	echo " " >> randomtestresults.out
 	echo "--------------------------------------------------------------------------------------------" >> randomtestresults.out
 	echo "randomtestcard1.c:" >> randomtestresults.out
-	gcc -o randomtestcard1 -g randomtestcard1.c salvager.c dominion.c rngs.c -coverage -lm
+	gcc -o randomtestcard1 -g randomtestcard1.c dominion.c rngs.c -coverage -lm
 	./randomtestcard1 >> randomtestresults.out
 	echo " " >> randomtestresults.out
-	gcov salvager.c -f -b >> randomtestresults.out
+	gcov dominion.c -f -b >> randomtestresults.out
 
-randomtestadventurer: randomtestadventurer.c adventurer.c dominion.c rngs.c
-	gcc -o randomtestadventurer -g randomtestadventurer.c adventurer.c dominion.c rngs.c -lm
+randomtestadventurer: randomtestadventurer.c dominion.c rngs.c
+	gcc -o randomtestadventurer -g randomtestadventurer.c dominion.c rngs.c -lm
 
-randomtestcard1: randomtestcard1.c salvager.c dominion.c rngs.c
-	gcc -o randomtestcard1 -g randomtestcard1.c salvager.c dominion.c rngs.c -lm
+randomtestcard1: randomtestcard1.c dominion.c rngs.c
+	gcc -o randomtestcard1 -g randomtestcard1.c dominion.c rngs.c -lm
 
 randomtestcard2: randomtestcard2.c dominion.c rngs.c
 	gcc -o randomtestcard2 -g randomtestcard2.c dominion.c rngs.c -lm
