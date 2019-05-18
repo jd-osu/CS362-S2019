@@ -141,15 +141,15 @@ void test_run()
   else
     salvager_pos = get_random_number(0,num_hand_prev - 1);
    
-  printf("num_total_prev=%d\n", num_total_prev);
-  printf("num_deck_prev=%d\n", num_deck_prev);
-  printf("num_hand_prev=%d\n", num_hand_prev);
-  printf("num_discard_prev=%d\n", num_discard_prev);
-  printf("num_played_prev=%d\n", num_played_prev);
-  printf("selected_card_idx=%d\n", selected_card_idx);
-  printf("coins_prev=%d\n", coins_prev);
-  printf("buys_prev=%d\n", buys_prev);
-  printf("salvager_pos=%d\n", salvager_pos);
+  //printf("num_total_prev=%d\n", num_total_prev);
+  //printf("num_deck_prev=%d\n", num_deck_prev);
+  //printf("num_hand_prev=%d\n", num_hand_prev);
+  //printf("num_discard_prev=%d\n", num_discard_prev);
+  //printf("num_played_prev=%d\n", num_played_prev);
+  //printf("selected_card_idx=%d\n", selected_card_idx);
+  //printf("coins_prev=%d\n", coins_prev);
+  //printf("buys_prev=%d\n", buys_prev);
+  //printf("salvager_pos=%d\n", salvager_pos);
   
   // modify new game based on random parameters  
   G.deckCount[0] = num_deck_prev;
@@ -194,12 +194,12 @@ void test_run()
   }
 
   eval_buys = buys_prev + 1;
-  printf("selected_card=%d\n", selected_card);
-  printf("selected_card_cost=%d\n", selected_card_cost);  
-  printf("eval_coins=%d\n", eval_coins);
-  printf("eval_buys=%d\n", eval_buys);
-  printf("eval_trash=%d\n", eval_trash);
-  printf("eval_played=%d\n", eval_played);
+  //printf("selected_card=%d\n", selected_card);
+  //printf("selected_card_cost=%d\n", selected_card_cost);  
+  //printf("eval_coins=%d\n", eval_coins);
+  //printf("eval_buys=%d\n", eval_buys);
+  //printf("eval_trash=%d\n", eval_trash);
+  //printf("eval_played=%d\n", eval_played);
 
 
 
@@ -207,7 +207,7 @@ void test_run()
 
 
   return_val = _salvager(0, &G, salvager_pos, selected_card_idx);
-  printf("return_val=%d\n", return_val);
+  //printf("return_val=%d\n", return_val);
 
   // get resulting data
   num_deck = G.deckCount[0];
@@ -215,16 +215,16 @@ void test_run()
   num_discard = G.discardCount[0];
   num_played = G.playedCardCount;
   num_total = num_deck + num_hand + num_discard + num_played;
-  printf("num_total=%d\n", num_total);
-  printf("num_deck=%d\n", num_deck);
-  printf("num_hand=%d\n", num_hand);
-  printf("num_discard=%d\n", num_discard);
-  printf("num_played=%d\n", num_played);
+  //printf("num_total=%d\n", num_total);
+  //printf("num_deck=%d\n", num_deck);
+  //printf("num_hand=%d\n", num_hand);
+  //printf("num_discard=%d\n", num_discard);
+  //printf("num_played=%d\n", num_played);
   
   coins = G.coins;
   buys = G.numBuys;
-  printf("buys=%d\n", buys);
-  printf("coins=%d\n", coins);
+  //printf("buys=%d\n", buys);
+  //printf("coins=%d\n", coins);
 
   // evaluate result
   result = 	(	(return_val != 0) ||
@@ -240,7 +240,7 @@ void test_run()
           (num_discard == num_discard_prev)
 				)
 			);
-  printf("result=%d\n", result);
+  //printf("result=%d\n", result);
   
   
     
@@ -264,9 +264,9 @@ void test_run()
           buys,
 					return_val);
 
-  printf("test=%s\n", test);
+  //printf("test=%s\n", test);
 
-    //_assert(result, test);
+    _assert(result, test);
 
 }
 
