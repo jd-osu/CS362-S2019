@@ -273,7 +273,7 @@ void test_run()
 int main() {
   srand(time(NULL));
 
-  int trials = 1000;
+  int trials = 100;
   int current = 1;
   
   while (current <= trials)
