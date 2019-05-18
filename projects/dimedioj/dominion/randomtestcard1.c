@@ -178,7 +178,7 @@ void test_run()
 	  selected_card = G.hand[0][selected_card_idx];
     selected_card_cost = getCost(selected_card);
 	  eval_coins = selected_card_cost;
-	  eval_trash = -1;
+	  eval_trash = 1;
     eval_played = 1;
   }
   else
@@ -223,25 +223,27 @@ void test_run()
   printf("buys=%d\n", buys);
   printf("coins=%d\n", coins);
 
-/*
+
   // evaluate result
   result = 	(	(return_val != 0) ||
   
 				(	(return_val == 0) &&
 					(num_total_prev == num_total + eval_trash) &&
-					(avail_tr == num_deck_tr + num_discard_tr + eval_tr) &&
-					(num_hand == num_hand_prev + eval_tr) &&
-					(num_hand_tr == num_hand_tr_prev + eval_tr) &&
-					(num_deck_prev + num_discard_prev == num_deck + num_discard + eval_tr) &&
-					(num_deck_tr_prev + num_hand_tr_prev + num_discard_tr_prev == num_deck_tr + num_hand_tr + num_discard_tr)
+					(num_hand_prev == num_hand + eval_trash + eval_played) &&
+          (num_played == num_played_prev + eval_played) &&
+					(G.playedCards[playedCardCount-1] == salvager) &&
+					(coins == coins_prev + eval_coins) &&
+					(buys == eval_buys) &&
+					(num_deck == num_deck_prev) &&
+          (num_discard == num_discard_prev)
 				)
 			);
-  //printf("result=%d\n", result);
+  printf("result=%d\n", result);
   
   
     
   //display_state(&G);
-    
+  /*  
   // set up print string
   sprintf(test, "(deck:%d,%d|hand:%d,%d|discard:%d,%d)->(deck:%d,%d|hand:%d,%d|discard:%d,%d); return=%d",
 					num_deck_prev, num_deck_tr_prev,
@@ -253,7 +255,7 @@ void test_run()
 					return_val);
 
 
-    _assert(result, test);
+    //_assert(result, test);
 	*/
 }
 
