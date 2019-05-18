@@ -223,7 +223,7 @@ void test_run()
   printf("buys=%d\n", buys);
   printf("coins=%d\n", coins);
 
-
+  /* 
   // evaluate result
   result = 	(	(return_val != 0) ||
   
@@ -243,7 +243,7 @@ void test_run()
   
     
   //display_state(&G);
-  /*  
+ 
   // set up print string
   sprintf(test, "(deck:%d,%d|hand:%d,%d|discard:%d,%d)->(deck:%d,%d|hand:%d,%d|discard:%d,%d); return=%d",
 					num_deck_prev, num_deck_tr_prev,
