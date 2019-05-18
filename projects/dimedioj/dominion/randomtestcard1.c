@@ -80,8 +80,11 @@ int _assert(bool condition, const char *test_name)
 
 int get_random_number(int low, int high)
 {
-
-  int number = low + (rand() % (high-low+1));
+  int number;
+  if ((high - low + 1) != 0)
+    number = low + (rand() % (high-low+1));
+  else
+    number = 0;
   
   return number;
 }
