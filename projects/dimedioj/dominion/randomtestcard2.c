@@ -231,7 +231,10 @@ void test_run()
   printf("num_discard=%d\n", num_discard);
   printf("num_played=%d\n", num_played);
   
-  gained_card = G.hand[0][G.handCount[0]-1];
+  if (eval_gained != 0)
+    gained_card = G.hand[0][G.handCount[0]-1];
+  else
+    gained_card = -9;
   played_card = G.playedCards[G.playedCardCount-1];
   c2_supply = G.supplyCount[c2];
   printf("gained_card=%d\n", gained_card);
@@ -255,32 +258,30 @@ void test_run()
 			);
   printf("result=%d\n", result);
   
-/*  
-    
+
   //display_state(&G);
  
   // set up print string
-  sprintf(test, "(dk:%d|hnd:%d|disc:%d|pld:%d|$:%d|bys:%d|svg:%d|sel:%d,%d)->(dk:%d|hnd:%d|disc:%d|pld:%d|$:%d|bys:%d); ret=%d",
+  sprintf(test, "(dk:%d|hnd:%d|disc:%d|pld:%d|qty:%d|mn:%d|c1:[%d]=%d,%d|c2:%d,%d)->(dk:%d|hnd:%d|disc:%d|pld:%d|qty:%d|gnd:%d); ret=%d",
 					num_deck_prev,
 					num_hand_prev,
 					num_discard_prev,
           num_played_prev,
-					coins_prev,
-          buys_prev,
-          salvager_pos,
-          selected_card_idx, selected_card_cost,
+					c2_supply_prev,
+          mine_pos,
+          c1_idx, c1, c1_cost,
+          c2, c2_cost,
 					num_deck,
 					num_hand,
 					num_discard,
           num_played,
-					coins,
-          buys,
+					c2_supply,
+          gained_card,
 					return_val);
 
-  //printf("test=%s\n", test);
+  printf("test=%s\n", test);
 
-    _assert(result, test);
-*/
+    //_assert(result, test);
 }
 
 int main() {
