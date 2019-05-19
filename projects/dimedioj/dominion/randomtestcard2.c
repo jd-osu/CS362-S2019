@@ -180,7 +180,7 @@ void test_run()
     c2_cost = getCost(c2);
 	  eval_cost = 3;
 	  eval_trash = 1;
-    if (c1 == mine_pos)
+    if (c1_idx == mine_pos)
       eval_played = 0;
     else
       eval_played = 1;
