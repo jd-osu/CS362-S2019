@@ -171,7 +171,7 @@ void test_run()
     G.playedCards[i] = get_random_card();
 
   if (num_hand_prev > 0)
-    G.hand[0][salvager_pos] = salvager;    
+    G.hand[0][salvager_pos] = salvager;     
   
   G.coins = coins_prev;
   G.numBuys = buys_prev;

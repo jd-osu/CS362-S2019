@@ -261,7 +261,7 @@ void test_run()
 
   //display_state(&G);
  
-  // set up print string
+  // set up print string 
   sprintf(test, "(dk:%d|hnd:%d|disc:%d|pld:%d|qty:%d|mn:%d|c1:[%d]=%d,%d|c2:%d,%d)->(dk:%d|hnd:%d|disc:%d|pld:%d|qty:%d|gnd:%d); ret=%d",
 					num_deck_prev,
 					num_hand_prev,

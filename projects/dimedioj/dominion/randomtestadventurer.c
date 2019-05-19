@@ -30,7 +30,7 @@ typedef enum {false, true} bool;
 
 const char PASS[] = "PASS";
 const char FAIL[] = "FAIL";
-const char FUNCTION[] = "_adventurer()";
+const char FUNCTION[] = "_adventurer()"; 
 
 void display_state(struct gameState *state)
 {
