@@ -216,8 +216,8 @@ void test_run()
 
   //display_state(&G);
 
-  //return_val = _salvager(0, &G, salvager_pos, selected_card_idx);
-  //printf("return_val=%d\n", return_val);
+  return_val = _mine(0, &G, mine_pos, c1_idx, c2);
+  printf("return_val=%d\n", return_val);
 
   // get resulting data
   num_deck = G.deckCount[0];
