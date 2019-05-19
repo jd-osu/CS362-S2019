@@ -52,6 +52,14 @@ randomtestresults: randomtestadventurer.c dominion.c rngs.c
 	./randomtestcard1 >> randomtestresults.out
 	echo " " >> randomtestresults.out
 	gcov dominion.c -f -b >> randomtestresults.out
+  
+  echo " " >> randomtestresults.out
+	echo "--------------------------------------------------------------------------------------------" >> randomtestresults.out
+	echo "randomtestcard2.c:" >> randomtestresults.out
+	gcc -o randomtestcard2 -g randomtestcard2.c dominion.c rngs.c -coverage -lm
+	./randomtestcard2 >> randomtestresults.out
+	echo " " >> randomtestresults.out
+	gcov dominion.c -f -b >> randomtestresults.out
 
 randomtestadventurer: randomtestadventurer.c dominion.c rngs.c
 	gcc -o randomtestadventurer -g randomtestadventurer.c dominion.c rngs.c -lm
