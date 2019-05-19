@@ -110,7 +110,6 @@ void test_run()
   int num_played, num_played_prev;
   int eval_cost, eval_played, eval_trash, eval_gained;
   int c2_supply_prev, c2_supply;
-  bool played;
   int gained_card, played_card;
     
   int return_val;
@@ -182,15 +181,9 @@ void test_run()
 	  eval_cost = 3;
 	  eval_trash = 1;
     if (c1 == mine_pos)
-    {
-      played = false;
       eval_played = 0;
-    }
     else
-    {
-      played = true;
       eval_played = 1;
-    }
     if (c2_supply_prev == 0)
       eval_gained = 0;
     else
@@ -204,7 +197,6 @@ void test_run()
 	  eval_cost = 3;
 	  eval_trash = 0;
     eval_played = -9;
-    played = false;
     if (c2_supply_prev == 0)
       eval_gained = 0;
     else
@@ -218,7 +210,6 @@ void test_run()
   printf("eval_trash=%d\n", eval_trash);
   printf("eval_played=%d\n", eval_played);
   printf("eval_gained=%d\n", eval_gained);
-  printf("played=%d\n", played);
 
   //randomize c2 supply
   G.supplyCount[c2] = c2_supply_prev;
@@ -254,16 +245,17 @@ void test_run()
 					(num_total_prev == num_total + eval_trash) &&
 					(num_hand_prev == num_hand + eval_trash + eval_played) &&
           (num_played == num_played_prev + eval_played) &&
-					(played_card == mine) &&
-					(coins == coins_prev + eval_coins) &&
-					(buys == eval_buys) &&
+					((played_card == mine) || (eval_played == 0)) &&
+					((gained_card == c2) || (eval_gained == 0)) &&
+					((c2_cost <= c1_cost + eval_cost) || (eval_gained == 0)) &&
+					(c2_supply_prev == c2_supply + eval_gained) &&
 					(num_deck == num_deck_prev) &&
           (num_discard == num_discard_prev)
 				)
 			);
-  //printf("result=%d\n", result);
+  printf("result=%d\n", result);
   
-  
+/*  
     
   //display_state(&G);
  
@@ -288,7 +280,7 @@ void test_run()
   //printf("test=%s\n", test);
 
     _assert(result, test);
-
+*/
 }
 
 int main() {
