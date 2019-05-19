@@ -141,15 +141,15 @@ void test_run()
   else
     mine_pos = get_random_number(0,num_hand_prev - 1);
    
-  printf("num_total_prev=%d\n", num_total_prev);
-  printf("num_deck_prev=%d\n", num_deck_prev);
-  printf("num_hand_prev=%d\n", num_hand_prev);
-  printf("num_discard_prev=%d\n", num_discard_prev);
-  printf("num_played_prev=%d\n", num_played_prev);
-  printf("c1_idx=%d\n", c1_idx);
-  printf("c2=%d\n", c2);
-  printf("c2_supply_prev=%d\n", c2_supply_prev);
-  printf("mine_pos=%d\n", mine_pos);
+  //printf("num_total_prev=%d\n", num_total_prev);
+  //printf("num_deck_prev=%d\n", num_deck_prev);
+  //printf("num_hand_prev=%d\n", num_hand_prev);
+  //printf("num_discard_prev=%d\n", num_discard_prev);
+  //printf("num_played_prev=%d\n", num_played_prev);
+  //printf("c1_idx=%d\n", c1_idx);
+  //printf("c2=%d\n", c2);
+  //printf("c2_supply_prev=%d\n", c2_supply_prev);
+  //printf("mine_pos=%d\n", mine_pos);
   
   // modify new game based on random parameters  
   G.deckCount[0] = num_deck_prev;
@@ -203,13 +203,13 @@ void test_run()
       eval_gained = 1;
   }
 
-  printf("c1=%d\n", c1);
-  printf("c1_cost=%d\n", c1_cost);  
-  printf("c2_cost=%d\n", c2_cost);
-  printf("eval_cost=%d\n", eval_cost);
-  printf("eval_trash=%d\n", eval_trash);
-  printf("eval_played=%d\n", eval_played);
-  printf("eval_gained=%d\n", eval_gained);
+  //printf("c1=%d\n", c1);
+  //printf("c1_cost=%d\n", c1_cost);  
+  //printf("c2_cost=%d\n", c2_cost);
+  //printf("eval_cost=%d\n", eval_cost);
+  //printf("eval_trash=%d\n", eval_trash);
+  //printf("eval_played=%d\n", eval_played);
+  //printf("eval_gained=%d\n", eval_gained);
 
   //randomize c2 supply
   G.supplyCount[c2] = c2_supply_prev;
@@ -217,7 +217,7 @@ void test_run()
   //display_state(&G);
 
   return_val = _mine(0, &G, mine_pos, c1_idx, c2);
-  printf("return_val=%d\n", return_val);
+  //printf("return_val=%d\n", return_val);
 
   // get resulting data
   num_deck = G.deckCount[0];
@@ -225,11 +225,11 @@ void test_run()
   num_discard = G.discardCount[0];
   num_played = G.playedCardCount;
   num_total = num_deck + num_hand + num_discard + num_played;
-  printf("num_total=%d\n", num_total);
-  printf("num_deck=%d\n", num_deck);
-  printf("num_hand=%d\n", num_hand);
-  printf("num_discard=%d\n", num_discard);
-  printf("num_played=%d\n", num_played);
+  //printf("num_total=%d\n", num_total);
+  //printf("num_deck=%d\n", num_deck);
+  //printf("num_hand=%d\n", num_hand);
+  //printf("num_discard=%d\n", num_discard);
+  //printf("num_played=%d\n", num_played);
   
   if (eval_gained != 0)
     gained_card = G.hand[0][G.handCount[0]-1];
@@ -237,9 +237,9 @@ void test_run()
     gained_card = -9;
   played_card = G.playedCards[G.playedCardCount-1];
   c2_supply = G.supplyCount[c2];
-  printf("gained_card=%d\n", gained_card);
-  printf("played_card=%d\n", played_card);
-  printf("c2_supply=%d\n", c2_supply);
+  //printf("gained_card=%d\n", gained_card);
+  //printf("played_card=%d\n", played_card);
+  //printf("c2_supply=%d\n", c2_supply);
 
   // evaluate result
   result = 	(	(return_val != 0) ||
@@ -256,7 +256,7 @@ void test_run()
           (num_discard == num_discard_prev)
 				)
 			);
-  printf("result=%d\n", result);
+  //printf("result=%d\n", result);
   
 
   //display_state(&G);
@@ -279,7 +279,7 @@ void test_run()
           gained_card,
 					return_val);
 
-  printf("test=%s\n", test);
+  //printf("test=%s\n", test);
 
   _assert(result, test);
 }
