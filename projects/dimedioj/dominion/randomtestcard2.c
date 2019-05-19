@@ -281,7 +281,7 @@ void test_run()
 
   printf("test=%s\n", test);
 
-    //_assert(result, test);
+  _assert(result, test);
 }
 
 int main() {
