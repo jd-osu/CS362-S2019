@@ -826,7 +826,7 @@ int playSmithy(struct gameState *state, int currentPlayer, int handPos)
 {
   //+3 Cards
   int i;
-  for (i = 0; i < 2; i++) //BUG! i < 3
+  for (i = 0; i < 3; i++) //BUG! i < 3
   {
     drawCard(currentPlayer, state);
   }
