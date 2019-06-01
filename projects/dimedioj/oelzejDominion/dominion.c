@@ -783,6 +783,9 @@ int playMine(struct gameState *state, int choice1, int choice2, int handPos, int
   int j;
   j = state->hand[currentPlayer][choice1];  //store card we will trash
 
+  if (state->handCount == 0)
+    return -1;
+
   if (state->hand[currentPlayer][choice1] < copper || state->hand[currentPlayer][choice1] > gold)
   {
     return -1; 
