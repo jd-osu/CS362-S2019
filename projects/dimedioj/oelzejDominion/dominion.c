@@ -651,7 +651,7 @@ int playAdventurer(struct gameState *state)
 {
   int currentPlayer = whoseTurn(state);
   int temphand[MAX_HAND];// moved above the if statement
-  int drawntreasure=2; //BUG - should equal 0
+  int drawntreasure=0; //BUG - should equal 0
   int cardDrawn;
   int z = 0;// this is the counter for the temp hand
 
