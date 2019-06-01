@@ -18,7 +18,7 @@ typedef enum {false, true} bool;
 
 const char PASS[] = "PASS";
 const char FAIL[] = "FAIL";
-const char FUNCTION[] = "_smithy()";
+const char FUNCTION[] = "playSmithy()";
 
 void display_state(struct gameState *state)
 {
@@ -99,8 +99,7 @@ int main() {
     card3 = G.deck[0][G.deckCount[0]-3];
 
     //display_state(&G);
-    
-    return_val = _smithy(0, &G, smithy_idx);
+    return_val = playSmithy(&G, 0, smithy_idx);
 
     //display_state(&G);
     
@@ -131,7 +130,7 @@ int main() {
     
     //display_state(&G);
     
-    return_val = _smithy(0, &G, smithy_idx);
+    return_val = playSmithy(&G, 0, smithy_idx);
 
     //display_state(&G);
     
@@ -168,7 +167,7 @@ int main() {
 
     //display_state(&G);
     
-    return_val = _smithy(0, &G, smithy_idx);
+    return_val = playSmithy(&G, 0, smithy_idx);
 
     //display_state(&G);
     

@@ -18,7 +18,7 @@ typedef enum {false, true} bool;
 
 const char PASS[] = "PASS";
 const char FAIL[] = "FAIL";
-const char FUNCTION[] = "_mine()";
+const char FUNCTION[] = "playMine()";
 
 void display_state(struct gameState *state)
 {
@@ -109,8 +109,7 @@ int main() {
     c2_qty_Prev = G.supplyCount[c2];
     
     //display_state(&G);    
-    
-    return_val = _mine(0, &G, mine_idx, c1_idx, c2); // int player, struct gameState *state, int pos, int c1, int c2
+    return_val = playMine(&G, c1_idx, c2, mine_idx, 0);
     
     //display_state(&G);    
     
@@ -162,7 +161,7 @@ int main() {
     
     //display_state(&G);    
     
-    return_val = _mine(0, &G, mine_idx, c1_idx, c2); // int player, struct gameState *state, int pos, int c1, int c2
+    return_val = playMine(&G, c1_idx, c2, mine_idx, 0);
     
     //display_state(&G);    
     
@@ -215,7 +214,7 @@ int main() {
     
     //display_state(&G);    
     
-    return_val = _mine(0, &G, mine_idx, c1_idx, c2); // int player, struct gameState *state, int pos, int c1, int c2
+    return_val = playMine(&G, c1_idx, c2, mine_idx, 0);
     
     //display_state(&G);    
     

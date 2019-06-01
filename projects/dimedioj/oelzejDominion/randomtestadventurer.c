@@ -30,7 +30,7 @@ typedef enum {false, true} bool;
 
 const char PASS[] = "PASS";
 const char FAIL[] = "FAIL";
-const char FUNCTION[] = "_adventurer()"; 
+const char FUNCTION[] = "playAdventurer()"; 
 
 void display_state(struct gameState *state)
 {
@@ -176,8 +176,8 @@ void test_run()
   
   //display_state(&G);
 
-
-  return_val = _adventurer(0, &G);
+  G.whoseTurn = 0;
+  return_val = playAdventurer(&G);
   //printf("return_val=%d\n", return_val);
 
   // get resulting data

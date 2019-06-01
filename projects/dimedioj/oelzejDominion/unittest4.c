@@ -18,7 +18,7 @@ typedef enum {false, true} bool;
 
 const char PASS[] = "PASS";
 const char FAIL[] = "FAIL";
-const char FUNCTION[] = "_sea_hag()";
+const char FUNCTION[] = "cardEffect(SEA_HAG)";
 
 void display_state(struct gameState *state)
 {
@@ -117,8 +117,9 @@ int main() {
     curse_qty_Prev = G.supplyCount[curse];
 
     //display_state(&G);    
-    
-    return_val = _sea_hag(0, &G);
+    int *bonus;
+    G.whoseTurn = 0;
+    return_val = cardEffect(sea_hag, 0, 0, 0, &G, hag_idx, bonus);
     
     //display_state(&G);    
     
@@ -170,7 +171,8 @@ int main() {
 
     //display_state(&G);    
     
-    return_val = _sea_hag(0, &G);
+    G.whoseTurn = 0;
+    return_val = cardEffect(sea_hag, 0, 0, 0, &G, hag_idx, bonus);
     
     //display_state(&G);    
     
@@ -228,7 +230,8 @@ int main() {
 
     //display_state(&G);    
     
-    return_val = _sea_hag(0, &G);
+    G.whoseTurn = 0;
+    return_val = cardEffect(sea_hag, 0, 0, 0, &G, hag_idx, bonus);
     
     //display_state(&G);    
     
@@ -280,7 +283,8 @@ int main() {
 
     //display_state(&G);    
     
-    return_val = _sea_hag(0, &G);
+    G.whoseTurn = 0;
+    return_val = cardEffect(sea_hag, 0, 0, 0, &G, hag_idx, bonus);
     
     //display_state(&G);    
     
@@ -326,7 +330,8 @@ int main() {
 
     //display_state(&G);    
     
-    return_val = _sea_hag(0, &G);
+    G.whoseTurn = 0;
+    return_val = cardEffect(sea_hag, 0, 0, 0, &G, hag_idx, bonus);
     
     //display_state(&G);    
     
@@ -377,7 +382,8 @@ int main() {
 
     //display_state(&G);    
     
-    return_val = _sea_hag(0, &G);
+    G.whoseTurn = 0;
+    return_val = cardEffect(sea_hag, 0, 0, 0, &G, hag_idx, bonus);
     
     //display_state(&G);    
     

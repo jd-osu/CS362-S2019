@@ -30,7 +30,7 @@ typedef enum {false, true} bool;
 
 const char PASS[] = "PASS";
 const char FAIL[] = "FAIL";
-const char FUNCTION[] = "_salvager()";
+const char FUNCTION[] = "cardEffect(SALVAGER)";
 
 void display_state(struct gameState *state)
 {
@@ -204,9 +204,8 @@ void test_run()
 
 
   //display_state(&G);
-
-
-  return_val = _salvager(0, &G, salvager_pos, selected_card_idx);
+  int *bonus;
+  return_val = cardEffect(salvager, selected_card_idx, 0, 0, &G, salvager_pos, bonus);
   //printf("return_val=%d\n", return_val);
 
   // get resulting data
