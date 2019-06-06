@@ -504,9 +504,6 @@ protected void setUp() {
 
    public void testValidator500() throws IOException {
        UrlValidator validator = new UrlValidator();
-       assertFalse(false);
-       assertTrue(true);
-       assertTrue(validator.isValid("http://example.com/serach?address=Main+Avenue"));
        
        // NOTE: The file of URLs to test comes from:
        // http://www.seobook.com/download-alexa-top-1-000-000-websites-free
@@ -526,6 +523,30 @@ protected void setUp() {
        for (int i=0; i < lines.length; i++) {
     	   System.out.println("TESTING:"+lines[i]);
            assertTrue(lines[i], validator.isValid(lines[i]));
+       }
+   }
+   
+   public void testValidator501() throws IOException {
+       UrlValidator validator = new UrlValidator();
+       
+       // NOTE: The file of URLs to test comes from:
+       // http://www.seobook.com/download-alexa-top-1-000-000-websites-free
+       
+       //NOTE: The following code for reading files is adapted from:
+       // https://www.geeksforgeeks.org/different-ways-reading-text-file-java/   AND
+       // https://stackoverflow.com/questions/1480398/java-reading-a-file-from-current-directory
+       String path_string = System.getProperty("user.dir") + "\\test\\invalid.txt";
+
+       String data = ""; 
+       data = new String(Files.readAllBytes(Paths.get(path_string)));
+       
+       // NOTE: The following code for parsing strings by newlines is adapted from:
+       // https://stackoverflow.com/questions/454908/split-java-string-by-new-line
+       String lines[] = data.split("\\r?\\n");
+
+       for (int i=0; i < lines.length; i++) {
+    	   System.out.println("TESTING:"+lines[i]);
+           assertFalse(lines[i], validator.isValid(lines[i]));
        }
    }
    
