@@ -128,7 +128,7 @@ protected void setUp() {
          System.out.println();
       }
    }
-
+/*
    public void testValidator202() {
        String[] schemes = {"http","https"};
        UrlValidator urlValidator = new UrlValidator(schemes, UrlValidator.NO_FRAGMENTS);
@@ -334,7 +334,7 @@ protected void setUp() {
         assertFalse(urlValidator.isValid("http://example.rocks:65536/"));
         assertFalse(urlValidator.isValid("http://example.rocks:100000/"));
     }
-
+*/
     static boolean incrementTestPartsIndex(int[] testPartsIndex, Object[] testParts) {
       boolean carry = true;  //add 1 to lowest order part.
       boolean maxIndex = true;
@@ -371,7 +371,7 @@ protected void setUp() {
       return carryMsg.toString();
 
    }
-
+/*
    public void testValidateUrl() {
       assertTrue(true);
    }
@@ -500,6 +500,13 @@ protected void setUp() {
        assertFalse(validator.isValid("http://example.com/serach?address=Main Avenue"));
        assertTrue(validator.isValid("http://example.com/serach?address=Main%20Avenue"));
        assertTrue(validator.isValid("http://example.com/serach?address=Main+Avenue"));
+   }
+*/   
+   public void testValidator499() throws IOException {
+       UrlValidator validator = new UrlValidator();
+       
+       String data = "http://➡.ws/䨹";
+       assertTrue(data, validator.isValid(data));
    }
 
    public void testValidator500() throws IOException {
