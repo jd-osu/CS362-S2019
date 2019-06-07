@@ -1,0 +1,7 @@
+eclipse.preferences.version=1
+encoding//src/DomainValidator.java=UTF-8
+encoding//src/InetAddressValidator.java=UTF-8
+encoding//src/RegexValidator.java=UTF-8
+encoding//src/ResultPair.java=UTF-8
+encoding//src/UrlValidator.java=UTF-8
+encoding//test/UrlValidatorTest.java=UTF-8
