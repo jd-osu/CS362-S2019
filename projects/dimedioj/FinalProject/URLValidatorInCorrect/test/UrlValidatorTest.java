@@ -18,6 +18,10 @@
 import junit.framework.TestCase;
 import java.util.Random;
 
+import java.io.IOException;
+import java.nio.file.*;;
+
+
 /**
  * Performs Validation Test for url validations.
  *
@@ -595,7 +599,129 @@ protected void setUp() {
        assertTrue(validator.isValid("http://example.com/serach?address=Main%20Avenue"));
        assertTrue(validator.isValid("http://example.com/serach?address=Main+Avenue"));
    }
+   
+   public void testValidator499() throws IOException {
+       UrlValidator validator = new UrlValidator();
+       
+       String data = "http://➡.ws/䨹";
+       assertTrue(data, validator.isValid(data));
+   }
 
+   public void testValidator500() throws IOException {
+       UrlValidator validator = new UrlValidator();
+       
+       // NOTE: The file of URLs to test comes from:
+       // http://www.seobook.com/download-alexa-top-1-000-000-websites-free
+       
+       //NOTE: The following code for reading files is adapted from:
+       // https://www.geeksforgeeks.org/different-ways-reading-text-file-java/   AND
+       // https://stackoverflow.com/questions/1480398/java-reading-a-file-from-current-directory
+       String path_string = System.getProperty("user.dir") + "\\test\\valid.txt";
+
+       String data = ""; 
+       data = new String(Files.readAllBytes(Paths.get(path_string)));
+       
+       // NOTE: The following code for parsing strings by newlines is adapted from:
+       // https://stackoverflow.com/questions/454908/split-java-string-by-new-line
+       String lines[] = data.split("\\r?\\n");
+
+       for (int i=0; i < lines.length; i++) {
+    	   System.out.println("TESTING:"+lines[i]);
+           assertTrue(lines[i], validator.isValid(lines[i]));
+       }
+   }
+   
+   public void testValidator501() throws IOException {
+       UrlValidator validator = new UrlValidator();
+       
+       // NOTE: The file of URLs to test comes from:
+       // http://www.seobook.com/download-alexa-top-1-000-000-websites-free
+       
+       //NOTE: The following code for reading files is adapted from:
+       // https://www.geeksforgeeks.org/different-ways-reading-text-file-java/   AND
+       // https://stackoverflow.com/questions/1480398/java-reading-a-file-from-current-directory
+       String path_string = System.getProperty("user.dir") + "\\test\\invalid.txt";
+
+       String data = ""; 
+       data = new String(Files.readAllBytes(Paths.get(path_string)));
+       
+       // NOTE: The following code for parsing strings by newlines is adapted from:
+       // https://stackoverflow.com/questions/454908/split-java-string-by-new-line
+       String lines[] = data.split("\\r?\\n");
+
+       for (int i=0; i < lines.length; i++) {
+    	   System.out.println("TESTING:"+lines[i]);
+           assertFalse(lines[i], validator.isValid(lines[i]));
+       }
+   }
+   
+	   //basic option testing
+	public void testValidator502() {
+		   UrlValidator urlVal = new UrlValidator();
+		   assertTrue(urlVal.isValid("http://www.github.com"));
+		   assertTrue(urlVal.isValid("http://www.github.com/index.html"));
+		   assertTrue(urlVal.isValid("http://www.github.com:8000/dir/index.html"));
+		   assertFalse(urlVal.isValid("www.github.com"));
+		   assertFalse(urlVal.isValid("http://localhost/file.html"));
+		   assertFalse(urlVal.isValid(null));
+		   assertFalse(urlVal.isValid("http://github.com///index.html"));
+		   assertTrue(urlVal.isValid("https://www.github.com/index.html?query#frag"));
+	}
+	
+	//test fragment identifier
+	public void testValidator503() {
+		   UrlValidator urlVal = new UrlValidator(UrlValidator.NO_FRAGMENTS);
+		   assertTrue(urlVal.isValid("http://www.github.com/path.htmlQuery"));
+		   assertFalse(urlVal.isValid("http://www.github.com/path.html#foo"));
+	}
+	
+	//test when local URL
+	public void testValidator504() {
+		   UrlValidator urlVal = new UrlValidator(UrlValidator.ALLOW_LOCAL_URLS);
+		   assertTrue(urlVal.isValid("http://github.com/"));
+		   assertTrue(urlVal.isValid("http://localhost/user/index.html"));
+		   assertTrue(urlVal.isValid("http://localhost/file.html"));
+		   assertFalse(urlVal.isValid("http://localhost/////file.html"));
+		   assertFalse(urlVal.isValid("localhost/user/index.html"));
+	}
+	
+	//test schemes
+	public void testValidator505() {
+		   String[] schemes = {"http", "https"};
+		   UrlValidator urlVal = new UrlValidator(schemes);
+		   assertTrue(urlVal.isValid("https://www.github.com/path#frag"));
+		   //invalid scheme
+		   assertFalse(urlVal.isValid("hpp://www.github.com/path#frag"));
+		   assertFalse(urlVal.isValid("httpss://www.github.com/path#frag"));
+		   //invalid host
+		   assertFalse(urlVal.isValid("http://path#frag"));
+		   //correct scheme and url
+		   assertTrue(urlVal.isValid("https://www.github.com/path?query#frag"));
+		   
+		   //update to allow all schemes now
+		   urlVal = new UrlValidator(UrlValidator.ALLOW_ALL_SCHEMES);
+		   assertTrue(urlVal.isValid("hp://www.github.com"));
+		   assertTrue(urlVal.isValid("httttps://www.github.com/path?query"));
+		   //cannot be numerics
+		   assertFalse(urlVal.isValid("111://www.github.com/"));
+		   //cannot be blank
+		   assertFalse(urlVal.isValid("://www.github.com/"));
+		   assertFalse(urlVal.isValid("www.github.com/"));
+	}
+	
+	//test allow_2_slashes option
+	public void testValidator506() {
+		   UrlValidator urlVal = new UrlValidator(UrlValidator.ALLOW_2_SLASHES);
+		   //check a normal url
+		   assertTrue(urlVal.isValid("https://www.github.com/path1/path2?query#frag"));
+		   //missing '/'
+		   assertFalse(urlVal.isValid("https://www.github.compath1?query#frag"));
+		   //check with 2 '/' in the path
+		   assertTrue(urlVal.isValid("https://www.github.com/path1//path2?query#frag"));
+		   //check with more than 2
+		   assertFalse(urlVal.isValid("https://www.github.com/path1/////path2?query#frag"));	//BUG
+	}
+   
    //-------------------- Test data for creating a composite URL
    /**
     * The data given below approximates the 4 parts of a URL
