@@ -467,6 +467,12 @@ public class UrlValidator implements Serializable {
         if (isOff(ALLOW_2_SLASHES) && (slash2Count > 0)) {
             return false;
         }
+        
+        //bug fix
+        slash2Count = countToken("///", path); 
+        if (isOn(ALLOW_2_SLASHES) && (slash2Count > 0)) {
+        	return false;
+        }
 
         return true;
     }
