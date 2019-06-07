@@ -497,6 +497,73 @@ protected void setUp() {
        assertTrue(validator.isValid("http://example.com/serach?address=Main%20Avenue"));
        assertTrue(validator.isValid("http://example.com/serach?address=Main+Avenue"));
    }
+   
+      //basic option testing
+   public void testValidator502() {
+	   UrlValidator urlVal = new UrlValidator();
+	   assertTrue(urlVal.isValid("http://www.github.com"));
+	   assertTrue(urlVal.isValid("http://www.github.com/index.html"));
+	   assertTrue(urlVal.isValid("http://www.github.com:8000/dir/index.html"));
+	   assertFalse(urlVal.isValid("www.github.com"));
+	   assertFalse(urlVal.isValid("http://localhost/file.html"));
+	   assertFalse(urlVal.isValid(null));
+	   assertFalse(urlVal.isValid("http://github.com///index.html"));
+	   assertTrue(urlVal.isValid("https://www.github.com/index.html?query#frag"));
+   }
+   
+   //test fragment identifier
+   public void testValidator503() {
+	   UrlValidator urlVal = new UrlValidator(UrlValidator.NO_FRAGMENTS);
+	   assertTrue(urlVal.isValid("http://www.github.com/path.htmlQuery"));
+	   assertFalse(urlVal.isValid("http://www.github.com/path.html#foo"));
+   }
+   
+   //test when local URL
+   public void testValidator504() {
+	   UrlValidator urlVal = new UrlValidator(UrlValidator.ALLOW_LOCAL_URLS);
+	   assertTrue(urlVal.isValid("http://github.com/"));
+	   assertTrue(urlVal.isValid("http://localhost/user/index.html"));
+	   assertTrue(urlVal.isValid("http://localhost/file.html"));
+	   assertFalse(urlVal.isValid("http://localhost/////file.html"));
+	   assertFalse(urlVal.isValid("localhost/user/index.html"));
+   }
+   
+   //test schemes
+   public void testValidator505() {
+	   String[] schemes = {"http", "https"};
+	   UrlValidator urlVal = new UrlValidator(schemes);
+	   assertTrue(urlVal.isValid("https://www.github.com/path#frag"));
+	   //invalid scheme
+	   assertFalse(urlVal.isValid("hpp://www.github.com/path#frag"));
+	   assertFalse(urlVal.isValid("httpss://www.github.com/path#frag"));
+	   //invalid host
+	   assertFalse(urlVal.isValid("http://path#frag"));
+	   //correct scheme and url
+	   assertTrue(urlVal.isValid("https://www.github.com/path?query#frag"));
+	   
+	   //update to allow all schemes now
+	   urlVal = new UrlValidator(UrlValidator.ALLOW_ALL_SCHEMES);
+	   assertTrue(urlVal.isValid("hp://www.github.com"));
+	   assertTrue(urlVal.isValid("httttps://www.github.com/path?query"));
+	   //cannot be numerics
+	   assertFalse(urlVal.isValid("111://www.github.com/"));
+	   //cannot be blank
+	   assertFalse(urlVal.isValid("://www.github.com/"));
+	   assertFalse(urlVal.isValid("www.github.com/"));
+   }
+   
+   //test allow_2_slashes option
+   public void testValidator506() {
+	   UrlValidator urlVal = new UrlValidator(UrlValidator.ALLOW_2_SLASHES);
+	   //check a normal url
+	   assertTrue(urlVal.isValid("https://www.github.com/path1/path2?query#frag"));
+	   //missing '/'
+	   assertFalse(urlVal.isValid("https://www.github.compath1?query#frag"));
+	   //check with 2 '/' in the path
+	   assertTrue(urlVal.isValid("https://www.github.com/path1//path2?query#frag"));
+	   //check with more than 2
+	   assertFalse(urlVal.isValid("https://www.github.com/path1/////path2?query#frag"));	//BUG
+   }
 
    //-------------------- Test data for creating a composite URL
    /**
